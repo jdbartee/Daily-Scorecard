@@ -27,13 +27,13 @@ class ScoreProvider: NSObject, BaseService {
     func numericValue(for score: Score) -> Float? {
         switch score {
         case .VeryBad:
-            return 1.0
+            return 0.5
         case .Bad:
-            return 2.0
+            return 1.5
         case .Ok:
-            return 3.0
+            return 2.5
         case .Good:
-            return 4.0
+            return 3.5
         case .VeryGood:
             return 5.0
         case .None:

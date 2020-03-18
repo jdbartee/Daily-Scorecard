@@ -9,7 +9,7 @@
 import Foundation
 
 struct PromptEditViewModel: Hashable {
-    var id: Int?
+    var id: UUID?
     var prompt: String
     var active: Bool
     var sortOrder: Int

@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Prompt: Hashable {
-    var id: Int
+    var id: UUID
     var prompt: String
     var active: Bool
     var sortOrder: Int

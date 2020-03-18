@@ -16,8 +16,8 @@ enum DayViewViewModel {
 
 struct DayViewModel {
     struct DayViewEntry: Hashable {
-        var entryId: Int?
-        var promptId: Int
+        var entryId: UUID?
+        var promptId: UUID
         
         var prompt: String
         var score: Score?

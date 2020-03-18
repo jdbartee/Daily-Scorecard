@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Entry {
-    var id: Int?
-    var promptId: Int
+struct Entry: Hashable {
+    var id: UUID
+    var promptId: UUID
     var date: Date
     var score: Score
 }
