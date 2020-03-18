@@ -13,8 +13,8 @@ struct EntryDoesNotExist: Error {}
 protocol EntryStoreService {
     func getEntry(id: Int) -> Result<Entry, Error>
     func getEntries(for date: Date) -> Result<[Entry], Error>
-    func insert(promptId: Int, date: Date, score: Score) -> Result<Void, Error>
-    func update(entry: Entry) -> Result<Void, Error>
+    func insert(promptId: Int, date: Date, score: Score) -> Result<Entry, Error>
+    func update(entry: Entry) -> Result<Entry, Error>
     func delete(entry: Entry) -> Result<Void, Error>
 }
 
@@ -40,19 +40,19 @@ class InMemoryEntryStoreService: EntryStoreService {
         return .success(entry)
     }
 
-    func insert(promptId: Int, date: Date, score: Score) -> Result<Void, Error> {
+    func insert(promptId: Int, date: Date, score: Score) -> Result<Entry, Error> {
         let entry = Entry(id: newId(), promptId: promptId, date: date, score: score)
         entries[entry.id!] = entry
-        return .success(())
+        return .success(entry)
     }
 
-    func update(entry: Entry) -> Result<Void, Error> {
+    func update(entry: Entry) -> Result<Entry, Error> {
         guard let id = entry.id, entries.keys.contains(id) else {
             return .failure(EntryDoesNotExist())
         }
         entries[id] = entry
 
-        return .success(())
+        return .success(entry)
     }
 
     func delete(entry: Entry) -> Result<Void, Error> {

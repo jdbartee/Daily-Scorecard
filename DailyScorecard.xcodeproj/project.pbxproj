@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B105BD9241F08AF00D8581A /* DayViewTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B105BD8241F08AF00D8581A /* DayViewTableController.swift */; };
 		7B4F92602402CF9900993700 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F925F2402CF9900993700 /* Storyboarded.swift */; };
 		7B4F92622402D14500993700 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F92612402D14500993700 /* AppFlowController.swift */; };
 		7B4F92652402DF5800993700 /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F92642402DF5800993700 /* CancelBag.swift */; };
@@ -26,8 +27,7 @@
 		7B79637F23FA13A50073649E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B79637D23FA13A50073649E /* LaunchScreen.storyboard */; };
 		7B79638A23FA13A50073649E /* DailyScorecardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79638923FA13A50073649E /* DailyScorecardTests.swift */; };
 		7B79639B23FA234E0073649E /* DayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79639A23FA234E0073649E /* DayViewModel.swift */; };
-		7B79639D23FA25580073649E /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79639C23FA25580073649E /* DayViewController.swift */; };
-		7B7963A023FA45580073649E /* DayViewEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79639F23FA45580073649E /* DayViewEntryTableViewCell.swift */; };
+		7B7963A023FA45580073649E /* DayViewEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79639F23FA45580073649E /* DayViewEntryCell.swift */; };
 		7B7963A223FB96370073649E /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963A123FB96370073649E /* ServiceProvider.swift */; };
 		7B7963A423FB96690073649E /* DayViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963A323FB96690073649E /* DayViewService.swift */; };
 		7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963A523FE46D10073649E /* PromptTableViewController.swift */; };
@@ -56,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B105BD8241F08AF00D8581A /* DayViewTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewTableController.swift; sourceTree = "<group>"; };
 		7B4F925F2402CF9900993700 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		7B4F92612402D14500993700 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		7B4F92642402DF5800993700 /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
@@ -79,8 +80,7 @@
 		7B79638923FA13A50073649E /* DailyScorecardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyScorecardTests.swift; sourceTree = "<group>"; };
 		7B79638B23FA13A50073649E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B79639A23FA234E0073649E /* DayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewModel.swift; sourceTree = "<group>"; };
-		7B79639C23FA25580073649E /* DayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
-		7B79639F23FA45580073649E /* DayViewEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewEntryTableViewCell.swift; sourceTree = "<group>"; };
+		7B79639F23FA45580073649E /* DayViewEntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewEntryCell.swift; sourceTree = "<group>"; };
 		7B7963A123FB96370073649E /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		7B7963A323FB96690073649E /* DayViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewService.swift; sourceTree = "<group>"; };
 		7B7963A523FE46D10073649E /* PromptTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTableViewController.swift; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 				7B79639A23FA234E0073649E /* DayViewModel.swift */,
 				7B7963A323FB96690073649E /* DayViewService.swift */,
 				7B4FEAF02410BD61000AB5AC /* DayViewPagingController.swift */,
-				7B79639C23FA25580073649E /* DayViewController.swift */,
-				7B79639F23FA45580073649E /* DayViewEntryTableViewCell.swift */,
+				7B105BD8241F08AF00D8581A /* DayViewTableController.swift */,
+				7B79639F23FA45580073649E /* DayViewEntryCell.swift */,
 			);
 			path = DayView;
 			sourceTree = "<group>";
@@ -399,19 +399,19 @@
 				7B7963AA23FE4E2A0073649E /* PromptTableViewService.swift in Sources */,
 				7B79639B23FA234E0073649E /* DayViewModel.swift in Sources */,
 				7BD6A09B2414C05F008FF75A /* ChartFilterPickerViewController.swift in Sources */,
+				7B105BD9241F08AF00D8581A /* DayViewTableController.swift in Sources */,
 				7B7963B023FF7F720073649E /* PromptEditViewService.swift in Sources */,
 				7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */,
 				7B4F92652402DF5800993700 /* CancelBag.swift in Sources */,
 				7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */,
 				7B7963A223FB96370073649E /* ServiceProvider.swift in Sources */,
-				7B7963A023FA45580073649E /* DayViewEntryTableViewCell.swift in Sources */,
+				7B7963A023FA45580073649E /* DayViewEntryCell.swift in Sources */,
 				7B7963A823FE47180073649E /* PromptTableViewModel.swift in Sources */,
 				7B79637023FA13A30073649E /* AppDelegate.swift in Sources */,
 				7B4FEAE12404E1F9000AB5AC /* PromptStoreService.swift in Sources */,
 				7B4FEAED240CD6AF000AB5AC /* Calendar.swift in Sources */,
 				7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */,
 				7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */,
-				7B79639D23FA25580073649E /* DayViewController.swift in Sources */,
 				7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */,
 				7B4F92622402D14500993700 /* AppFlowController.swift in Sources */,
 				7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */,

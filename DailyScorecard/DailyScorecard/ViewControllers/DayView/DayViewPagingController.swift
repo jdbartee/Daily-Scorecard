@@ -13,9 +13,12 @@ class DayViewPagingController: UIViewController {
     var serviceProvider: ServiceProvider!
     var flowController: AppFlowController!
 
+    lazy var currentDate = initalDate()
+
     lazy var pageController: UIPageViewController = {
-        let dvc = nextDayViewController()
-        dvc.date = initalDate()
+        let dvc = getReusableDayViewTableController()
+        dvc.delegate = self
+        dvc.queryData(for: initalDate())
 
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         vc.dataSource = self
@@ -39,7 +42,6 @@ class DayViewPagingController: UIViewController {
     lazy var dateLabel: UILabel = {
         var label = UILabel()
         label.text = DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .none)
-        //label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
         label.adjustsFontForContentSizeCategory = true
@@ -85,9 +87,9 @@ class DayViewPagingController: UIViewController {
         return view
     }()
 
-    lazy var reusableDayViewControllers = Set<DayViewController>()
+    lazy var reusableDayViewControllers = Set<DayViewTableController>()
 
-    func nextDayViewController() -> DayViewController {
+    func getReusableDayViewTableController() -> DayViewTableController {
         if let vc = reusableDayViewControllers.filter({$0.parent == nil}).first {
             vc.prepareForReuse()
             return vc
@@ -98,11 +100,9 @@ class DayViewPagingController: UIViewController {
         }
     }
 
-    func newDayViewController() -> DayViewController {
-        let vc = DayViewController.instantiate()
-        vc.flowController = self.flowController
+    func newDayViewController() -> DayViewTableController {
+        let vc = DayViewTableController()
         vc.service = self.serviceProvider.dayViewService
-        vc.scoreProvider = self.serviceProvider.scoreProvider
         return vc
     }
 
@@ -132,33 +132,54 @@ class DayViewPagingController: UIViewController {
 
 extension DayViewPagingController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
 
+    var prevDate: Date? {
+        Calendar.current.prevDay(self.currentDate)
+    }
+    var nextDate: Date? {
+        if Calendar.current.isDateInToday(self.currentDate) {
+            return nil
+        } else {
+            return Calendar.current.nextDay(self.currentDate)
+        }
+    }
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewController = viewController as? DayViewController,
-            let date = Calendar.current.prevDay(viewController.date) else {
+        guard let date = prevDate else {
             return nil
         }
 
-        let vc = nextDayViewController()
-        vc.date = date
+        let vc = getReusableDayViewTableController()
+        vc.queryData(for: date)
         return vc
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewController = viewController as? DayViewController,
-            let date = Calendar.current.nextDay(viewController.date),
-            !Calendar.current.isDateInToday(viewController.date) else {
+        guard let date = nextDate else {
             return nil
         }
 
-        let vc = nextDayViewController()
-        vc.date = date
+        let vc = getReusableDayViewTableController()
+        vc.queryData(for: date)
         return vc
     }
 
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        if let viewController = pendingViewControllers[0] as? DayViewController {
-            self.dateLabel.text = DateFormatter.localizedString(from: viewController.date, dateStyle: .medium, timeStyle: .none)
-            self.dateLabel.sizeToFit()
+
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            if let currentViewController = pageViewController.viewControllers?[0] as? DayViewTableController {
+                currentViewController.delegate = self
+            }
+            if let previousViewController = previousViewControllers[0] as? DayViewTableController {
+                previousViewController.delegate = nil
+            }
         }
+    }
+}
+
+extension DayViewPagingController: DayViewTableControllerDelegate {
+    func dateUpdatedTo(date: Date) {
+        self.currentDate = date
+        self.dateLabel.text = DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .none)
+        self.dateLabel.sizeToFit()
     }
 }

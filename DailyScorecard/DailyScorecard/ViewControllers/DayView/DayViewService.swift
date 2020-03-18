@@ -32,12 +32,18 @@ class InMemoryDayViewService: DayViewService {
             let date = date
             let entries = (try? self.entryStore.getEntries(for: date).get()) ?? []
             let prompts = (try? self.promptStore.getPromptsForIdSet(ids: entries.map({$0.promptId})).get()) ?? []
+
+
             var dayViewEntries = [DayViewModel.DayViewEntry]()
 
             for prompt in prompts.sorted(by: {(p1, p2) in p1.sortOrder < p2.sortOrder}) {
-                let entry = entries.first(where: {$0.promptId == prompt.id})
-                dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
-
+                if let entry = entries.first(where: {$0.promptId == prompt.id}) {
+                    dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
+                } else {
+                    if let entry = self.entryStore.insert(promptId: prompt.id, date: date, score: .None).toOptional() {
+                        dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
+                    }
+                }
             }
             promise(.success(DayViewModel(date: date, entries: dayViewEntries)))
         }.eraseToAnyPublisher()

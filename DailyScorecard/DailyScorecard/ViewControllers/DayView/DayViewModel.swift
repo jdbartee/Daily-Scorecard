@@ -8,13 +8,20 @@
 
 import Foundation
 
+enum DayViewViewModel {
+    case none
+    case error(error: String)
+    case value(model: DayViewModel)
+}
+
 struct DayViewModel {
     struct DayViewEntry: Hashable {
         var entryId: Int?
         var promptId: Int
         
         var prompt: String
-        var score: String
+        var score: Score?
+        var scoreProvider: ScoreProvider
     }
 
     var date: Date
@@ -26,7 +33,8 @@ extension DayViewModel.DayViewEntry {
         self.entryId = entry?.id
         self.promptId = prompt.id
 
-        self.score = scoreProvider.shortLabel(for: entry?.score)
+        self.score = entry?.score
         self.prompt = prompt.prompt
+        self.scoreProvider = scoreProvider
     }
 }

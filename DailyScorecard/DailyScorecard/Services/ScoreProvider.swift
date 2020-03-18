@@ -9,6 +9,7 @@
 import Foundation
 
 enum Score: Int, CaseIterable {
+    case None = 0
     case VeryBad = 1
     case Bad = 2
     case Ok = 3
@@ -20,10 +21,10 @@ class ScoreProvider: NSObject, BaseService {
     var serviceProvider: ServiceProvider
 
     lazy var scores: [Score] = {
-        return Score.allCases
+        return Score.allCases.filter({$0 != .None})
     }()
 
-    func numericValue(for score: Score?) -> Float? {
+    func numericValue(for score: Score) -> Float? {
         switch score {
         case .VeryBad:
             return 1.0
@@ -34,17 +35,33 @@ class ScoreProvider: NSObject, BaseService {
         case .Good:
             return 4.0
         case .VeryGood:
-            return 120.0
-        case .none:
+            return 5.0
+        case .None:
             return nil
         }
     }
     
     func maxNumericValue() -> Float {
-        return 120.0
+        return numericValue(for: .VeryGood)!
+    }
+    func shortLabel(for score: Score) -> String {
+        switch score {
+        case .VeryBad:
+            return "1"
+        case .Bad:
+            return "2"
+        case .Ok:
+            return "3"
+        case .Good:
+            return "4"
+        case .VeryGood:
+            return "5"
+        case .None:
+            return "-"
+        }
     }
 
-    func shortLabel(for score: Score?) -> String {
+    func starLabel(for score: Score) -> String {
         switch score {
         case .VeryBad:
             return "★☆☆☆☆"
@@ -56,12 +73,12 @@ class ScoreProvider: NSObject, BaseService {
             return "★★★★☆"
         case .VeryGood:
             return "★★★★★"
-        case .none:
+        case .None:
             return "-"
         }
     }
 
-    func label(for score: Score?) -> String {
+    func label(for score: Score) -> String {
         switch score {
         case .VeryBad:
             return "1 - Very Bad"
@@ -73,7 +90,7 @@ class ScoreProvider: NSObject, BaseService {
             return "4 - Good"
         case .VeryGood:
             return "5 - Very Good"
-        case .none:
+        case .None:
             return "-"
         }
     }
