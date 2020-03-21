@@ -27,6 +27,8 @@ class ChartFilterPickerViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ChartFilterCell.self, forCellReuseIdentifier: "chart.filter")
         tableView.dataSource = self.tableViewDataSource
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
         tableView.delegate = self.tableViewDelegate
         return tableView
     }()

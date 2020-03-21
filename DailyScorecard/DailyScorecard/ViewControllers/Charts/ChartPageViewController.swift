@@ -58,7 +58,7 @@ class ChartPageViewController: UIViewController {
 
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
 
         view.addSubview(graphContainerView)
         view.addSubview(filterContainerView)

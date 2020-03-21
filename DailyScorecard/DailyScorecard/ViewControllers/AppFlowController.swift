@@ -20,7 +20,8 @@ class AppFlowController: UIViewController {
     }()
 
     lazy var ownedNavigationController: UINavigationController = {
-        return UINavigationController(rootViewController: self.initialViewController)
+        let nav = UINavigationController(rootViewController: self.initialViewController)
+        return nav
     }()
 
     lazy var initialViewController: UIViewController = {

@@ -137,7 +137,7 @@ extension DayViewTableController: UITableViewDataSource {
             fatalError()
         }
         cell.setValues(for: entry)
-        cell.selectedIndexChanged = { score in
+        cell.scoreValueChanged = { score in
             if let date = self.date, let score = score {
                 self.service?.setScore(for: entry, date: date, to: score)
                 self.queryData(for: date)

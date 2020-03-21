@@ -43,6 +43,8 @@
 		7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A0982414BFE6008FF75A /* ChartViewController.swift */; };
 		7BD6A09B2414C05F008FF75A /* ChartFilterPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09A2414C05F008FF75A /* ChartFilterPickerViewController.swift */; };
 		7BD6A09D241599A9008FF75A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09C241599A9008FF75A /* Result.swift */; };
+		7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D822425BE6E00EBE6BB /* Color.swift */; };
+		7BE52D852426918800EBE6BB /* OptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D842426918800EBE6BB /* OptionSelectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		7BD6A0982414BFE6008FF75A /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7BD6A09A2414C05F008FF75A /* ChartFilterPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFilterPickerViewController.swift; sourceTree = "<group>"; };
 		7BD6A09C241599A9008FF75A /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		7BE52D822425BE6E00EBE6BB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7BE52D842426918800EBE6BB /* OptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 				7B4F92642402DF5800993700 /* CancelBag.swift */,
 				7B4FEAEC240CD6AF000AB5AC /* Calendar.swift */,
 				7BD6A09C241599A9008FF75A /* Result.swift */,
+				7BE52D822425BE6E00EBE6BB /* Color.swift */,
+				7BE52D842426918800EBE6BB /* OptionSelectionView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 			files = (
 				7B4FEAE52408BDE0000AB5AC /* EntryStoreService.swift in Sources */,
 				7B4FEAE32408BD37000AB5AC /* Entry.swift in Sources */,
+				7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */,
 				7B79637A23FA13A30073649E /* DailyScorecard.xcdatamodeld in Sources */,
 				7B94AFD72411C26800AEDEC8 /* ScoreProvider.swift in Sources */,
 				7B4F92672404C0F500993700 /* PromptEditFlowController.swift in Sources */,
@@ -404,6 +411,7 @@
 				7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */,
 				7B4F92652402DF5800993700 /* CancelBag.swift in Sources */,
 				7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */,
+				7BE52D852426918800EBE6BB /* OptionSelectionView.swift in Sources */,
 				7B7963A223FB96370073649E /* ServiceProvider.swift in Sources */,
 				7B7963A023FA45580073649E /* DayViewEntryCell.swift in Sources */,
 				7B7963A823FE47180073649E /* PromptTableViewModel.swift in Sources */,

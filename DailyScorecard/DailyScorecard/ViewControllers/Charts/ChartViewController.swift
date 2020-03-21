@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ChartViewController: UIViewController {
+class ChartViewController: UIViewController  {
     var entries: [(Date, Float)] = [] {
         didSet {
             updateData()
@@ -69,7 +69,7 @@ class ChartViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        self.view.backgroundColor = .systemGroupedBackground
+        self.view.backgroundColor = .systemBackground
         self.view.layer.cornerRadius = 8.0
         self.view.layer.masksToBounds = true
         self.view.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +106,7 @@ class BarView: UIView {
 
     lazy var barView: UIView = {
         let barView = UIView()
-        barView.backgroundColor = .systemBlue
+        barView.backgroundColor = self.tintColor
         barView.layer.cornerRadius = 8
         barView.layer.masksToBounds = false
         barView.layer.shadowColor = UIColor.black.cgColor
@@ -156,6 +156,10 @@ class BarView: UIView {
         self.layoutIfNeeded()
     }
 
+    override func tintColorDidChange() {
+        self.barView.backgroundColor = self.tintColor
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(labelView)

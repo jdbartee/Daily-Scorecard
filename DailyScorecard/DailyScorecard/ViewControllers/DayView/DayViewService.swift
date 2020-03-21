@@ -38,7 +38,9 @@ class InMemoryDayViewService: DayViewService {
 
             for prompt in prompts.sorted(by: {(p1, p2) in p1.sortOrder < p2.sortOrder}) {
                 if let entry = entries.first(where: {$0.promptId == prompt.id}) {
-                    dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
+                    if  (entry.score != .None || prompt.active ) {
+                        dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
+                    }
                 } else {
                     if let entry = self.entryStore.insert(promptId: prompt.id, date: date, score: .None).toOptional() {
                         dayViewEntries.append(DayViewModel.DayViewEntry(withPrompt: prompt, andEntry: entry, using: self.scoreProvider))
