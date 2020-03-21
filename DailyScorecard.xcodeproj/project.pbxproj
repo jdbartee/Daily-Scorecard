@@ -45,6 +45,7 @@
 		7BD6A09D241599A9008FF75A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09C241599A9008FF75A /* Result.swift */; };
 		7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D822425BE6E00EBE6BB /* Color.swift */; };
 		7BE52D852426918800EBE6BB /* OptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D842426918800EBE6BB /* OptionSelectionView.swift */; };
+		7BE52D872426C72F00EBE6BB /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D862426C72F00EBE6BB /* TestController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		7BD6A09C241599A9008FF75A /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		7BE52D822425BE6E00EBE6BB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7BE52D842426918800EBE6BB /* OptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectionView.swift; sourceTree = "<group>"; };
+		7BE52D862426C72F00EBE6BB /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				7B79639823FA14020073649E /* Services */,
 				7B79639723FA13FC0073649E /* Models */,
 				7B79639523FA13EB0073649E /* Storyboards */,
+				7BE52D862426C72F00EBE6BB /* TestController.swift */,
 			);
 			path = DailyScorecard;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				7B105BD9241F08AF00D8581A /* DayViewTableController.swift in Sources */,
 				7B7963B023FF7F720073649E /* PromptEditViewService.swift in Sources */,
 				7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */,
+				7BE52D872426C72F00EBE6BB /* TestController.swift in Sources */,
 				7B4F92652402DF5800993700 /* CancelBag.swift in Sources */,
 				7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */,
 				7BE52D852426918800EBE6BB /* OptionSelectionView.swift in Sources */,

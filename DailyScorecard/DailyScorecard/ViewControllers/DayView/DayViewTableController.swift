@@ -105,7 +105,7 @@ extension DayViewTableController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return 200
     }
 }
 
@@ -143,7 +143,6 @@ extension DayViewTableController: UITableViewDataSource {
                 self.queryData(for: date)
             }
         }
-        cell.layoutIfNeeded()
 
         return cell
     }

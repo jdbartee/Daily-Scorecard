@@ -28,6 +28,12 @@ class AppFlowController: UIViewController {
         return self.pageController
     }()
 
+    lazy var testController: UIViewController = {
+        let testController = TestController()
+        testController.title = "TESTING"
+        return testController
+    }()
+
     lazy var pageController: UIViewController = {
         let vc = DayViewPagingController()
         vc.serviceProvider = self.serviceProvider
