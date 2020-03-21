@@ -98,6 +98,7 @@ class DayViewEntryCell: UITableViewCell {
         if let score = entry.score {
             self.scoreSelectionView.selectedOptionIndex = self.scores.firstIndex(of: score)
         }
+        promptView.textColor = entry.promptActive ? .label : .tertiaryLabel
     }
 
     override func layoutSubviews() {

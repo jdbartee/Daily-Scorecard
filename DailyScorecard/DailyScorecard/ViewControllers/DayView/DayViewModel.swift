@@ -20,6 +20,7 @@ struct DayViewModel {
         var promptId: UUID
         
         var prompt: String
+        var promptActive: Bool
         var score: Score?
         var scoreProvider: ScoreProvider
     }
@@ -35,6 +36,7 @@ extension DayViewModel.DayViewEntry {
 
         self.score = entry?.score
         self.prompt = prompt.prompt
+        self.promptActive = prompt.active
         self.scoreProvider = scoreProvider
     }
 }
