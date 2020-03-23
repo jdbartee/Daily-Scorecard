@@ -14,7 +14,7 @@ class TestController: UIViewController {
     lazy var optionView: OptionSelectionView = {
         let optionView = OptionSelectionView()
         optionView.translatesAutoresizingMaskIntoConstraints = false
-        optionView.setOptions(options: ["A", "B", "CC", "D", "E", "F", "g"])
+        optionView.setOptions(options: ["A", "B", "CCCC"])
         optionView.selectedOptionIndex = 0
 
         return optionView

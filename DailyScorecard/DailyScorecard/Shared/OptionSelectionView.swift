@@ -10,20 +10,17 @@ import Foundation
 import UIKit
 
 
-class OptionSelectionView: UIView {
+class OptionSelectionView: UIControl {
 
-    private class OptionTapRecognizer: UITapGestureRecognizer {
-        var optionIndex: Int? = nil
-    }
 
+    var selectedOptionIndexDidChange: ((Int?)->Void)?
     private(set) var options = [String]()
+
     var selectedOptionIndex: Int? {
         didSet {
             animateChangeToSelectedOption(oldValue)
         }
     }
-    var selectedOptionIndexDidChange: ((Int?)->Void)?
-
 
     func setOptions(options: [String]) {
         self.selectedOptionIndex = nil
@@ -42,20 +39,31 @@ class OptionSelectionView: UIView {
 
     private func animateChangeToSelectedOption(_ oldValue: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.25) {
                 if let oldIndex = oldValue {
-                    let button = self.optionsStackView.arrangedSubviews[oldIndex]
-                    button.backgroundColor = .clear
-                    (button.subviews[0] as? UILabel)?.textColor = .label
+                    let button = self.optionsStackView.arrangedSubviews[oldIndex] as? UIButton
+                    button?.isSelected = false
                 }
                 if let index = self.selectedOptionIndex {
-                    let button = self.optionsStackView.arrangedSubviews[index]
-                    button.backgroundColor = button.tintColor
-                    (button.subviews[0] as? UILabel)?.textColor = .white
+                    if let button = self.optionsStackView.arrangedSubviews[index] as? UIButton {
+                        self.selector.isHidden = false
+                        button.isSelected = true
+                        self.selector.frame = button.frame
+                        self.selector.layer.cornerRadius = button.layer.cornerRadius
+                        }
+                } else {
+                    self.selector.isHidden = true
                 }
             }
         }
     }
+
+    private lazy var selector: UIView = {
+        let selector = UIView(frame: .zero)
+        selector.isHidden = true
+        selector.backgroundColor = self.tintColor
+        return selector
+    }()
 
     private lazy var optionsStackView: UIStackView = {
         let optionsStackView = UIStackView()
@@ -66,52 +74,38 @@ class OptionSelectionView: UIView {
         return optionsStackView
     }()
 
-    private lazy var selectionBubble: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.isHidden = true
-        view.frame.size = CGSize(width: 50, height: 50)
-        view.layer.cornerRadius = 25
-        view.backgroundColor = self.tintColor
-        return view
-    }()
-
-    private func buttonView(for index: Int) -> UIView {
+    private func buttonView(for index: Int) -> UIButton {
         let option = options[index]
-        let optionTap = OptionTapRecognizer(target: self, action: #selector(optionTapped(_:)))
-        optionTap.optionIndex = index
 
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addGestureRecognizer(optionTap)
-        view.layer.cornerRadius = 8
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tag = index
+        button.addTarget(self, action: #selector(optionTapped(_:)), for: .touchUpInside)
+        button.layer.cornerRadius = 8
+        button.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-        label.font = .preferredFont(forTextStyle: .title1)
-        label.text = option
-        label.textAlignment = .center
-        label.sizeToFit()
+        button.titleLabel?.adjustsFontForContentSizeCategory = true
+        button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.sizeToFit()
 
-        view.addSubview(label)
+        button.setTitle(option, for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.setTitleColor(self.tintColor.contrastColor(), for: .selected)
 
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            label.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            label.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            label.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            view.widthAnchor.constraint(equalTo: view.heightAnchor),
+            button.widthAnchor.constraint(greaterThanOrEqualTo: button.heightAnchor),
         ])
 
-        return view
+        return button
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.addSubview(selector)
         self.addSubview(optionsStackView)
+
         NSLayoutConstraint.activate([
             optionsStackView.topAnchor.constraint(equalTo: topAnchor),
             optionsStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -131,13 +125,17 @@ class OptionSelectionView: UIView {
 
     override func tintColorDidChange() {
         super.tintColorDidChange()
+        selector.backgroundColor = tintColor
+        for button in optionsStackView.arrangedSubviews.compactMap({$0 as? UIButton}) {
+            button.setTitleColor(tintColor.contrastColor(), for: .selected)
+        }
         self.setNeedsDisplay()
     }
 
     @objc private func optionTapped(_ sender: Any) {
-        if let sender = sender as? OptionTapRecognizer {
-            if self.selectedOptionIndex != sender.optionIndex {
-                self.selectedOptionIndex = sender.optionIndex
+        if let sender = sender as? UIButton {
+            if self.selectedOptionIndex != sender.tag {
+                self.selectedOptionIndex = sender.tag
                 self.selectedOptionIndexDidChange?(self.selectedOptionIndex)
             }
         }

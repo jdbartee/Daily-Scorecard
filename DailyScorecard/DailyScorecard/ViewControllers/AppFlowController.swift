@@ -34,6 +34,12 @@ class AppFlowController: UIViewController {
         tabController.addChild(self.chartController)
         tabController.addChild(self.dayViewController)
 
+        self.chartController.tabBarItem.title = "Charts"
+        self.chartController.tabBarItem.image = UIImage(systemName: "chart.bar")
+
+        self.dayViewController.tabBarItem.title = "Day View"
+        self.dayViewController.tabBarItem.image = UIImage(systemName: "list.dash")
+
         tabController.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
 
         tabController.selectedViewController = self.dayViewController
@@ -43,8 +49,6 @@ class AppFlowController: UIViewController {
 
     lazy var chartController: ChartPageViewController = {
         let vc = ChartPageViewController()
-        vc.tabBarItem.title = "Charts"
-        vc.tabBarItem.image = UIImage(systemName: "chart.bar")
         vc.service = serviceProvider.chartViewService
         return vc
     }()
@@ -60,8 +64,6 @@ class AppFlowController: UIViewController {
         vc.serviceProvider = self.serviceProvider
         vc.flowController = self
         vc.title = "Day View"
-        vc.tabBarItem.title = "Day View"
-        vc.tabBarItem.image = UIImage(systemName: "list.dash")
         vc.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
         vc.navigationItem.setLeftBarButton(self.chartsButtonItem, animated: true)
         return vc
