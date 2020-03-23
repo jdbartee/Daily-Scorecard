@@ -28,7 +28,7 @@ class DayViewPagingController: UIViewController {
         vc.view.addSubview(self.dateView)
 
         NSLayoutConstraint.activate([
-            dateView.bottomAnchor.constraint(equalTo: vc.view.bottomAnchor, constant: -50),
+            dateView.bottomAnchor.constraint(equalTo: vc.view.bottomAnchor, constant: -10),
             dateView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor, constant: 0)
         ])
 
@@ -49,7 +49,7 @@ class DayViewPagingController: UIViewController {
         return label
     }()
 
-    lazy var blurEffect = UIBlurEffect(style: .systemMaterialDark)
+    lazy var blurEffect = UIBlurEffect(style: .systemMaterial)
 
     lazy var vibrancyView: UIVisualEffectView = {
         let vibrancyView = UIVisualEffectView()
@@ -108,6 +108,7 @@ class DayViewPagingController: UIViewController {
 
     override func loadView() {
         view = UIView()
+        view.backgroundColor = .systemBackground
         install(child: self.pageController)
     }
 
@@ -119,10 +120,10 @@ class DayViewPagingController: UIViewController {
         view.addSubview(child.view)
 
         NSLayoutConstraint.activate([
-            child.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            child.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            child.view.topAnchor.constraint(equalTo: view.topAnchor),
-            child.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            child.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            child.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            child.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            child.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         child.didMove(toParent: self)

@@ -25,7 +25,28 @@ class AppFlowController: UIViewController {
     }()
 
     lazy var initialViewController: UIViewController = {
-        return self.pageController
+        return self.tabController
+    }()
+
+    lazy var tabController: UITabBarController = {
+        let tabController = UITabBarController()
+
+        tabController.addChild(self.chartController)
+        tabController.addChild(self.dayViewController)
+
+        tabController.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
+
+        tabController.selectedViewController = self.dayViewController
+
+        return tabController
+    }()
+
+    lazy var chartController: ChartPageViewController = {
+        let vc = ChartPageViewController()
+        vc.tabBarItem.title = "Charts"
+        vc.tabBarItem.image = UIImage(systemName: "chart.bar")
+        vc.service = serviceProvider.chartViewService
+        return vc
     }()
 
     lazy var testController: UIViewController = {
@@ -34,11 +55,13 @@ class AppFlowController: UIViewController {
         return testController
     }()
 
-    lazy var pageController: UIViewController = {
+    lazy var dayViewController: UIViewController = {
         let vc = DayViewPagingController()
         vc.serviceProvider = self.serviceProvider
         vc.flowController = self
         vc.title = "Day View"
+        vc.tabBarItem.title = "Day View"
+        vc.tabBarItem.image = UIImage(systemName: "list.dash")
         vc.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
         vc.navigationItem.setLeftBarButton(self.chartsButtonItem, animated: true)
         return vc
@@ -67,9 +90,7 @@ class AppFlowController: UIViewController {
     }
 
     func presentChartsView() {
-        let vc = ChartPageViewController()
-        vc.service = serviceProvider.chartViewService
-        self.ownedNavigationController.pushViewController(vc, animated: true)
+        self.ownedNavigationController.pushViewController(self.chartController, animated: true)
     }
 
     lazy var actionSheetController: UIAlertController = {

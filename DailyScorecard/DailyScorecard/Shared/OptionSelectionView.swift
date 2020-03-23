@@ -19,7 +19,7 @@ class OptionSelectionView: UIView {
     private(set) var options = [String]()
     var selectedOptionIndex: Int? {
         didSet {
-            animateChangeToSelectedOption()
+            animateChangeToSelectedOption(oldValue)
         }
     }
     var selectedOptionIndexDidChange: ((Int?)->Void)?
@@ -40,44 +40,22 @@ class OptionSelectionView: UIView {
         }
     }
 
-    private func animateChangeToSelectedOption() {
+    private func animateChangeToSelectedOption(_ oldValue: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            if let index = self.selectedOptionIndex {
-                self.selectionBubble.isHidden = false
-                let button = self.optionsStackView.arrangedSubviews[index]
-                self.snapBehavior.snapPoint = button.center
-            } else {
-                self.selectionBubble.isHidden = true
+            UIView.animate(withDuration: 0.5) {
+                if let oldIndex = oldValue {
+                    let button = self.optionsStackView.arrangedSubviews[oldIndex]
+                    button.backgroundColor = .clear
+                    (button.subviews[0] as? UILabel)?.textColor = .label
+                }
+                if let index = self.selectedOptionIndex {
+                    let button = self.optionsStackView.arrangedSubviews[index]
+                    button.backgroundColor = button.tintColor
+                    (button.subviews[0] as? UILabel)?.textColor = .white
+                }
             }
         }
     }
-
-    private lazy var animator: UIDynamicAnimator = {
-        var animator = UIDynamicAnimator(referenceView: self.optionsStackView)
-        return animator
-    }()
-
-    private lazy var behavior: UIDynamicBehavior = {
-        let behavior = UIDynamicBehavior()
-        behavior.addChildBehavior(slidingBehavior)
-        behavior.addChildBehavior(snapBehavior)
-        return behavior
-    }()
-
-    private lazy var slidingBehavior: UIAttachmentBehavior = {
-        let behavior = UIAttachmentBehavior.slidingAttachment(
-            with: selectionBubble,
-            attachmentAnchor: .zero,
-            axisOfTranslation: CGVector(dx: 1, dy: 0))
-        behavior.attachmentRange = .infinite
-        return behavior
-    }()
-
-    private lazy var snapBehavior: UISnapBehavior = {
-        let behavior = UISnapBehavior(item: selectionBubble, snapTo: .zero)
-        behavior.addChildBehavior(self.slidingBehavior)
-        return behavior
-    }()
 
     private lazy var optionsStackView: UIStackView = {
         let optionsStackView = UIStackView()
@@ -85,7 +63,6 @@ class OptionSelectionView: UIView {
         optionsStackView.distribution = .equalSpacing
         optionsStackView.axis = .horizontal
 
-        optionsStackView.addSubview(selectionBubble)
         return optionsStackView
     }()
 
@@ -107,6 +84,7 @@ class OptionSelectionView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addGestureRecognizer(optionTap)
+        view.layer.cornerRadius = 8
         view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
         let label = UILabel()
@@ -140,17 +118,19 @@ class OptionSelectionView: UIView {
             optionsStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             optionsStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
-
-        animator.addBehavior(behavior)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.animateChangeToSelectedOption(self.selectedOptionIndex)
+    }
+
     override func tintColorDidChange() {
         super.tintColorDidChange()
-        self.selectionBubble.backgroundColor = self.tintColor
         self.setNeedsDisplay()
     }
 
@@ -159,7 +139,6 @@ class OptionSelectionView: UIView {
             if self.selectedOptionIndex != sender.optionIndex {
                 self.selectedOptionIndex = sender.optionIndex
                 self.selectedOptionIndexDidChange?(self.selectedOptionIndex)
-                animateChangeToSelectedOption()
             }
         }
     }
