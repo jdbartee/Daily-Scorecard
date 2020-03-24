@@ -37,7 +37,7 @@ class AppFlowController: UIViewController {
         self.chartController.tabBarItem.title = "Charts"
         self.chartController.tabBarItem.image = UIImage(systemName: "chart.bar")
 
-        self.dayViewController.tabBarItem.title = "Day View"
+        self.dayViewController.tabBarItem.title = "Entries"
         self.dayViewController.tabBarItem.image = UIImage(systemName: "list.dash")
 
         tabController.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)

@@ -130,7 +130,6 @@
 				7B4FEAEC240CD6AF000AB5AC /* Calendar.swift */,
 				7BD6A09C241599A9008FF75A /* Result.swift */,
 				7BE52D822425BE6E00EBE6BB /* Color.swift */,
-				7BE52D842426918800EBE6BB /* OptionSelectionView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -255,6 +254,7 @@
 		7B79639E23FA45400073649E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7BE52D842426918800EBE6BB /* OptionSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

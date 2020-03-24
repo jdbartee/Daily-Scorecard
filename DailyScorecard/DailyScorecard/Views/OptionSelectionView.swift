@@ -49,7 +49,7 @@ class OptionSelectionView: UIControl {
                         self.selector.isHidden = false
                         button.isSelected = true
                         self.selector.frame = button.frame
-                        self.selector.layer.cornerRadius = button.layer.cornerRadius
+                        self.selector.layer.cornerRadius = button.frame.height / 2.0
                         }
                 } else {
                     self.selector.isHidden = true
@@ -81,7 +81,6 @@ class OptionSelectionView: UIControl {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tag = index
         button.addTarget(self, action: #selector(optionTapped(_:)), for: .touchUpInside)
-        button.layer.cornerRadius = 8
         button.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
         button.titleLabel?.adjustsFontForContentSizeCategory = true
