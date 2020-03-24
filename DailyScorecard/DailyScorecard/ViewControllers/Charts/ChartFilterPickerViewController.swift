@@ -97,12 +97,14 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
         label.translatesAutoresizingMaskIntoConstraints =  false
         switch section {
         case 0:
-            label.text = "Filters"
+            label.text = "Filters:"
         case 1:
-            label.text = "Prompts"
+            label.text = "Prompts:"
         default:
             break
         }
+        label.adjustsFontForContentSizeCategory = true
+        label.font = .preferredFont(forTextStyle: .headline)
         label.sizeToFit()
         view.addSubview(label)
         NSLayoutConstraint.activate([
@@ -153,6 +155,8 @@ class ChartFilterCell: UITableViewCell {
     lazy var filterLabel: UILabel = {
         let filterLabel = UILabel()
         filterLabel.translatesAutoresizingMaskIntoConstraints = false
+        filterLabel.adjustsFontForContentSizeCategory = true
+        filterLabel.font = .preferredFont(forTextStyle: .body)
         return filterLabel
     }()
 

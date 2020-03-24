@@ -29,7 +29,8 @@ class DayViewPagingController: UIViewController {
 
         NSLayoutConstraint.activate([
             dateView.bottomAnchor.constraint(equalTo: vc.view.bottomAnchor, constant: -10),
-            dateView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor, constant: 0)
+            dateView.centerXAnchor.constraint(equalTo: vc.view.centerXAnchor, constant: 0),
+            dateView.widthAnchor.constraint(equalTo: vc.view.widthAnchor, multiplier: 0.80)
         ])
 
         return vc
@@ -45,6 +46,7 @@ class DayViewPagingController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .preferredFont(forTextStyle: .body)
         label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .center
         label.sizeToFit()
         return label
     }()

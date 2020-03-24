@@ -40,7 +40,7 @@ class AppFlowController: UIViewController {
         self.dayViewController.tabBarItem.title = "Entries"
         self.dayViewController.tabBarItem.image = UIImage(systemName: "list.dash")
 
-        tabController.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
+        tabController.navigationItem.setLeftBarButton(self.actionButtonItem, animated: true)
 
         tabController.selectedViewController = self.dayViewController
 
@@ -70,9 +70,13 @@ class AppFlowController: UIViewController {
     }()
 
     lazy var actionButtonItem: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(actionsTapped(_:)))
+        let button = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsTapped(_:)))
         return button
     }()
+
+    @objc func settingsTapped(_ sender: Any) {
+        self.presentSettingsView()
+    }
 
     @objc func actionsTapped(_ sender: Any) {
         self.presentPromptEditFlow()
@@ -126,6 +130,13 @@ class AppFlowController: UIViewController {
             self.presentPromptEditFlow()
         })
     }()
+
+    func presentSettingsView() {
+        let vc = SettingsViewController()
+        vc.serviceProvider = self.serviceProvider
+        vc.modalPresentationStyle = .overCurrentContext
+        self.ownedNavigationController.pushViewController(vc, animated: true)
+    }
 
     func presentPromptEditFlow() {
         let vc = PromptEditFlowController()

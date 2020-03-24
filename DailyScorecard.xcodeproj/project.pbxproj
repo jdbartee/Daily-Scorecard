@@ -40,6 +40,7 @@
 		7B94AFDB2411E99100AEDEC8 /* ChartPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDA2411E99100AEDEC8 /* ChartPageViewController.swift */; };
 		7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDC2411EB1F00AEDEC8 /* ChartViewService.swift */; };
 		7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDE2411EB4900AEDEC8 /* ChartViewModel.swift */; };
+		7B98A9C124299227002BA9D1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98A9C024299227002BA9D1 /* SettingsViewController.swift */; };
 		7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A0982414BFE6008FF75A /* ChartViewController.swift */; };
 		7BD6A09B2414C05F008FF75A /* ChartFilterPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09A2414C05F008FF75A /* ChartFilterPickerViewController.swift */; };
 		7BD6A09D241599A9008FF75A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09C241599A9008FF75A /* Result.swift */; };
@@ -96,6 +97,7 @@
 		7B94AFDA2411E99100AEDEC8 /* ChartPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPageViewController.swift; sourceTree = "<group>"; };
 		7B94AFDC2411EB1F00AEDEC8 /* ChartViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewService.swift; sourceTree = "<group>"; };
 		7B94AFDE2411EB4900AEDEC8 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		7B98A9C024299227002BA9D1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7BD6A0982414BFE6008FF75A /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		7BD6A09A2414C05F008FF75A /* ChartFilterPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFilterPickerViewController.swift; sourceTree = "<group>"; };
 		7BD6A09C241599A9008FF75A /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
@@ -243,9 +245,9 @@
 		7B79639923FA14190073649E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7B98A9BF24299207002BA9D1 /* Settings */,
 				7B94AFD82411E97000AEDEC8 /* Charts */,
 				7B4FEAF22410BD82000AB5AC /* DayView */,
-				7B4F92682404C27400993700 /* PromptEdit */,
 				7B4F92612402D14500993700 /* AppFlowController.swift */,
 			);
 			path = ViewControllers;
@@ -289,6 +291,15 @@
 				7B7963AB23FF6F5F0073649E /* PromptEditViewController.swift */,
 			);
 			path = PromptDetail;
+			sourceTree = "<group>";
+		};
+		7B98A9BF24299207002BA9D1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7B4F92682404C27400993700 /* PromptEdit */,
+				7B98A9C024299227002BA9D1 /* SettingsViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +438,7 @@
 				7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */,
 				7B4F92622402D14500993700 /* AppFlowController.swift in Sources */,
 				7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */,
+				7B98A9C124299227002BA9D1 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
