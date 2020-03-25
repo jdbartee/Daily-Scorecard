@@ -43,7 +43,7 @@ class AppFlowController: UIViewController {
         tabController.navigationItem.setLeftBarButton(self.actionButtonItem, animated: true)
         tabController.selectedViewController = self.dayViewController
 
-        tabController.title = "theMEsystem"
+        tabController.title = self.serviceProvider.appDetails.appName
         return tabController
     }()
 

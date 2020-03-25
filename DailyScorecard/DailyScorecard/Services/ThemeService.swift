@@ -15,6 +15,7 @@ class ThemeService: BaseService {
     var defaultTheme = "Blue"
 
     var serviceProvider: ServiceProvider
+
     private var tintColors: [String:UIColor] = [
         "Orange": .systemOrange,
         "Purple": .systemPurple,
@@ -36,7 +37,6 @@ class ThemeService: BaseService {
     }
 
     func applyDefaultTheme() {
-
         let themeKey = UserDefaults().string(forKey: userDefaultsThemeKey) ?? defaultTheme
 
         UIView.appearance().tintColor = tintColors[themeKey]
@@ -48,7 +48,6 @@ class ThemeService: BaseService {
                 window.addSubview(view)
             }
         }
-
     }
 
     init(_ serviceProvide: ServiceProvider) {

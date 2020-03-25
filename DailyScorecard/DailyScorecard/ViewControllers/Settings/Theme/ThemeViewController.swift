@@ -95,6 +95,14 @@ extension ThemeViewController: UITableViewDataSource, UITableViewDelegate {
         service?.setTheme(theme)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
 }
 
 
@@ -136,15 +144,16 @@ class ThemeTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        NSLayoutConstraint.activate(layoutConstraints)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        contentView.layoutMargins = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        contentView.layoutMargins = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         contentView.addSubview(colorView)
         contentView.addSubview(themeLabel)
+        
+        NSLayoutConstraint.activate(layoutConstraints)
     }
 
     required init?(coder: NSCoder) {

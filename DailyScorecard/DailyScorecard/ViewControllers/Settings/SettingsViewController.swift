@@ -67,9 +67,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     var aboutController: UIViewController {
-        let aboutController = UIViewController()
-        aboutController.view.backgroundColor = .systemGroupedBackground
-        aboutController.title = "About"
+        let aboutController = AboutViewController()
+        aboutController.serviceProvider = self.serviceProvider
         return aboutController
     }
 

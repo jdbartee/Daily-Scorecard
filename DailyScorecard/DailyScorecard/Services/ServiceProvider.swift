@@ -15,6 +15,7 @@ protocol BaseService {
 
 class ServiceProvider {
     lazy var cancelBag = CancelBag()
+    lazy var appDetails: AppDetailService = AppDetailService(self)
     lazy var dayViewService: DayViewService = InMemoryDayViewService(self)
     lazy var promptTableViewService: PromptTableViewService = InMemoryPromptTableViewService(self)
     lazy var promptEditViewService: PromptEditViewService = InMemoryPromptEditViewService(self)

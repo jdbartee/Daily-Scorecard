@@ -19,6 +19,8 @@
 		7B4FEAEB240CB200000AB5AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B4FEAEA240CB200000AB5AC /* Main.storyboard */; };
 		7B4FEAED240CD6AF000AB5AC /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4FEAEC240CD6AF000AB5AC /* Calendar.swift */; };
 		7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4FEAF02410BD61000AB5AC /* DayViewPagingController.swift */; };
+		7B506025242B9FDA0042F169 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506024242B9FDA0042F169 /* AboutViewController.swift */; };
+		7B506027242BB1420042F169 /* AddDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506026242BB1420042F169 /* AddDetailService.swift */; };
 		7B719EF92404DFFC00A42374 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719EF82404DFFC00A42374 /* Prompt.swift */; };
 		7B79637023FA13A30073649E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79636F23FA13A30073649E /* AppDelegate.swift */; };
 		7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79637123FA13A30073649E /* SceneDelegate.swift */; };
@@ -77,6 +79,8 @@
 		7B4FEAEA240CB200000AB5AC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7B4FEAEC240CD6AF000AB5AC /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		7B4FEAF02410BD61000AB5AC /* DayViewPagingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewPagingController.swift; sourceTree = "<group>"; };
+		7B506024242B9FDA0042F169 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		7B506026242BB1420042F169 /* AddDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailService.swift; sourceTree = "<group>"; };
 		7B719EF82404DFFC00A42374 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		7B79636C23FA13A30073649E /* DailyScorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyScorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B79636F23FA13A30073649E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +172,14 @@
 			path = DayView;
 			sourceTree = "<group>";
 		};
+		7B506023242B9FC30042F169 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				7B506024242B9FDA0042F169 /* AboutViewController.swift */,
+			);
+			path = About;
+			sourceTree = "<group>";
+		};
 		7B79636323FA13A30073649E = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +262,7 @@
 				7B4FEAE42408BDE0000AB5AC /* EntryStoreService.swift */,
 				7B94AFD62411C26800AEDEC8 /* ScoreProvider.swift */,
 				7BD4B824242AD10400D894E5 /* ThemeService.swift */,
+				7B506026242BB1420042F169 /* AddDetailService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -308,6 +321,7 @@
 		7B98A9BF24299207002BA9D1 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				7B506023242B9FC30042F169 /* About */,
 				7B98A9C2242A5418002BA9D1 /* Theme */,
 				7B4F92682404C27400993700 /* PromptEdit */,
 				7B98A9C024299227002BA9D1 /* SettingsViewController.swift */,
@@ -429,6 +443,7 @@
 				7B4FEAE52408BDE0000AB5AC /* EntryStoreService.swift in Sources */,
 				7B4FEAE32408BD37000AB5AC /* Entry.swift in Sources */,
 				7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */,
+				7B506027242BB1420042F169 /* AddDetailService.swift in Sources */,
 				7B79637A23FA13A30073649E /* DailyScorecard.xcdatamodeld in Sources */,
 				7B94AFD72411C26800AEDEC8 /* ScoreProvider.swift in Sources */,
 				7BD4B825242AD10400D894E5 /* ThemeService.swift in Sources */,
@@ -450,6 +465,7 @@
 				7B7963B023FF7F720073649E /* PromptEditViewService.swift in Sources */,
 				7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */,
 				7BE52D872426C72F00EBE6BB /* TestController.swift in Sources */,
+				7B506025242B9FDA0042F169 /* AboutViewController.swift in Sources */,
 				7B4F92652402DF5800993700 /* CancelBag.swift in Sources */,
 				7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */,
 				7B98A9C4242A5435002BA9D1 /* ThemeViewController.swift in Sources */,
