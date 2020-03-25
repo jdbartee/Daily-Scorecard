@@ -110,7 +110,7 @@ class DayViewPagingController: UIViewController {
 
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
         install(child: self.pageController)
     }
 

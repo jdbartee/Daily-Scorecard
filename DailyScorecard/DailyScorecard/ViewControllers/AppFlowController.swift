@@ -41,9 +41,9 @@ class AppFlowController: UIViewController {
         self.dayViewController.tabBarItem.image = UIImage(systemName: "list.dash")
 
         tabController.navigationItem.setLeftBarButton(self.actionButtonItem, animated: true)
-
         tabController.selectedViewController = self.dayViewController
 
+        tabController.title = "theMEsystem"
         return tabController
     }()
 
@@ -78,14 +78,6 @@ class AppFlowController: UIViewController {
         self.presentSettingsView()
     }
 
-    @objc func actionsTapped(_ sender: Any) {
-        self.presentPromptEditFlow()
-    }
-
-    func showActionSheet() {
-        self.show(self.actionSheetController, sender: self)
-    }
-
     lazy var chartsButtonItem: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "chart.bar"), style: .plain, target: self, action: #selector(chartsTapped(_:)))
         return button
@@ -99,42 +91,9 @@ class AppFlowController: UIViewController {
         self.ownedNavigationController.pushViewController(self.chartController, animated: true)
     }
 
-    lazy var actionSheetController: UIAlertController = {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alertController.addAction(self.printDataAction)
-        alertController.addAction(self.printPromptsAction)
-        alertController.addAction(self.editPromptsAction)
-        alertController.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        return alertController
-    }()
-
-    lazy var printPromptsAction: UIAlertAction = {
-        UIAlertAction(title: "Print Prompts", style: .default, handler: {_ in
-            if let service = self.serviceProvider.promptStoreService as? InMemoryPromptStoreService {
-                print(service.prompts)
-            }
-        })
-    }()
-
-    lazy var printDataAction: UIAlertAction = {
-        UIAlertAction(title: "Print Data", style: .default, handler: {_ in
-            if let service = self.serviceProvider.entryStoreService as? InMemoryEntryStoreService {
-                print(service.entries)
-            }
-        })
-    }()
-
-    lazy var editPromptsAction: UIAlertAction = {
-        UIAlertAction(title: "Edit Prompts", style: .default, handler: {_ in
-            self.presentPromptEditFlow()
-        })
-    }()
-
     func presentSettingsView() {
         let vc = SettingsViewController()
         vc.serviceProvider = self.serviceProvider
-        vc.modalPresentationStyle = .overCurrentContext
         self.ownedNavigationController.pushViewController(vc, animated: true)
     }
 
@@ -143,6 +102,10 @@ class AppFlowController: UIViewController {
         vc.serviceProvider = self.serviceProvider
         vc.modalPresentationStyle = .overCurrentContext
         self.ownedNavigationController.pushViewController(vc, animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.serviceProvider.themeService.applyDefaultTheme()
     }
 
     override func loadView() {

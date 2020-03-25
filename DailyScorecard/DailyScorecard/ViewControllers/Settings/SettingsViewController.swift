@@ -24,10 +24,9 @@ class SettingsViewController: UIViewController {
         return tableView
     }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Settings"
-        view.backgroundColor = .systemBackground
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = .systemGroupedBackground
 
         view.addSubview(self.tableView)
 
@@ -37,6 +36,11 @@ class SettingsViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "Settings"
     }
 }
 
@@ -49,15 +53,28 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         return editPromptController
     }
 
+    var themeController: UIViewController {
+        let themeController = ThemeViewController()
+        themeController.serviceProvider = serviceProvider
+        return themeController
+    }
+
     var notificationsController: UIViewController {
         let notificationsController = UIViewController()
-        notificationsController.view.backgroundColor = .systemBackground
+        notificationsController.view.backgroundColor = .systemGroupedBackground
         notificationsController.title = "Notifications"
         return notificationsController
     }
 
+    var aboutController: UIViewController {
+        let aboutController = UIViewController()
+        aboutController.view.backgroundColor = .systemGroupedBackground
+        aboutController.title = "About"
+        return aboutController
+    }
+
     var titles: [String] {
-        return ["Edit Prompts", "Notifications"]
+        return ["Edit Prompts", "Themes", "Notifications", "About"]
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -78,7 +95,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         case 0:
             viewController = editPromptController
         case 1:
+            viewController = themeController
+        case 2:
             viewController = notificationsController
+        case 3:
+            viewController = aboutController
         default:
             return
         }

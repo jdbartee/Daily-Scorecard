@@ -20,8 +20,12 @@ class ServiceProvider {
     lazy var promptEditViewService: PromptEditViewService = InMemoryPromptEditViewService(self)
     lazy var chartViewService: ChartViewService = CCHartViewService(self)
 
+    lazy var themeViewService: ThemeViewService = ThemeViewService(self)
+
     lazy var promptStoreService: PromptStoreService = CoreDataPromptStoreService(self)
     lazy var entryStoreService: EntryStoreService = CoreDataEntryStoreService(self)
+
+    lazy var themeService: ThemeService = ThemeService(self)
 
     lazy var scoreProvider: ScoreProvider = ScoreProvider(self)
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
