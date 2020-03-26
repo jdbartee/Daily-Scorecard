@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 class ChartPageViewController: UIViewController {
-    var service: ChartViewService?
+    var serviceProvider: ServiceProvider?
+    var service: ChartViewService? {
+        self.serviceProvider?.chartViewService
+    }
     var state: ChartViewModel = ChartViewModel(percentages: [], dates: [], activeFilter: .all, filters: [.all]) {
         didSet {
             barChartController.entries = Array(zip(state.dates, state.percentages))
@@ -59,31 +62,31 @@ class ChartPageViewController: UIViewController {
 
     lazy var portraitConstraints: [NSLayoutConstraint] = {
         return [
-            graphContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            graphContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            graphContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            graphContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            graphContainerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            graphContainerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            graphContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            graphContainerView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.centerYAnchor),
 
 
             filterContainerView.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 20),
-            filterContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            filterContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            filterContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            filterContainerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            filterContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            filterContainerView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
         ]
     }()
 
     lazy var landscapConstrains: [NSLayoutConstraint] = {
         return [
-            graphContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            graphContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            graphContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            graphContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            graphContainerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            graphContainerView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            graphContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.centerXAnchor),
+            graphContainerView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
 
 
-            filterContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            filterContainerView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             filterContainerView.leadingAnchor.constraint(equalTo: graphContainerView.trailingAnchor, constant: 20),
-            filterContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            filterContainerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            filterContainerView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            filterContainerView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
         ]
     }()
 
@@ -109,6 +112,9 @@ class ChartPageViewController: UIViewController {
 
     override func loadView() {
         view = UIView()
+        if let insets = serviceProvider?.themeService.viewInsets {
+            view.directionalLayoutMargins = insets
+        }
         view.backgroundColor = .systemGroupedBackground
 
         view.addSubview(graphContainerView)

@@ -14,6 +14,9 @@ class ThemeService: BaseService {
     var userDefaultsThemeKey = "user.selected.theme"
     var defaultTheme = "Blue"
 
+    lazy var cardInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+    lazy var viewInsets = NSDirectionalEdgeInsets(top: 35, leading: 8, bottom: 35, trailing: 8)
+
     var serviceProvider: ServiceProvider
 
     private var tintColors: [String:UIColor] = [

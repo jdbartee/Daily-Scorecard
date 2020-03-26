@@ -49,7 +49,7 @@ class AppFlowController: UIViewController {
 
     lazy var chartController: ChartPageViewController = {
         let vc = ChartPageViewController()
-        vc.service = serviceProvider.chartViewService
+        vc.serviceProvider = serviceProvider
         return vc
     }()
 

@@ -67,7 +67,7 @@ class DayViewEntryCell: UITableViewCell {
         let cardView = UIView()
         cardView.translatesAutoresizingMaskIntoConstraints = false
         cardView.backgroundColor = .systemBackground
-        cardView.layer.cornerRadius = 8
+        //cardView.layer.cornerRadius = 8
         cardView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
 
 
@@ -114,17 +114,15 @@ class DayViewEntryCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
-        contentView.backgroundColor = .clear
-        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 8, trailing: 8)
+        contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 
         contentView.addSubview(cardView)
 
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
-            cardView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
-            cardView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            cardView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            cardView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            cardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
         ])
     }
 

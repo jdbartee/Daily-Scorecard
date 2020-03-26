@@ -97,7 +97,6 @@ class PromptTableViewController: UITableViewController, Storyboarded {
     }
 
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // The internet told me too.
         cell.textLabel?.text = nil
     }
 
@@ -117,7 +116,7 @@ class PromptTableViewController: UITableViewController, Storyboarded {
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
             switch section {
             case 0:
-                return "Active"
+                return nil
             case 1:
                 return "Inactive"
             default:

@@ -54,8 +54,7 @@ class DayViewTableController: UIViewController {
     }
 
     lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.separatorStyle = .none
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(DayViewEntryCell.self, forCellReuseIdentifier: "entry")

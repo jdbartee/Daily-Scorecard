@@ -28,9 +28,11 @@ class AboutViewController: UIViewController {
     private lazy var cardView: UIView = {
         let cardView = UIView()
         cardView.backgroundColor = .systemBackground
-        cardView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
         cardView.layer.cornerRadius = 8
         cardView.translatesAutoresizingMaskIntoConstraints = false
+        if let insets = self.serviceProvider?.themeService.cardInsets {
+            cardView.directionalLayoutMargins = insets
+        }
 
         cardView.addSubview(self.layoutStack)
         self.layoutStack.translatesAutoresizingMaskIntoConstraints = false
@@ -116,7 +118,10 @@ class AboutViewController: UIViewController {
 
     override func loadView() {
         self.view = UIView()
-        view.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        if let insets = self.serviceProvider?.themeService.viewInsets {
+            view.directionalLayoutMargins = insets
+            view.preservesSuperviewLayoutMargins = true
+        }
         view.backgroundColor = .systemGroupedBackground
 
         view.addSubview(cardView)
