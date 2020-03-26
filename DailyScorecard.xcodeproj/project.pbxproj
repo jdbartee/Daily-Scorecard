@@ -22,6 +22,9 @@
 		7B506025242B9FDA0042F169 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506024242B9FDA0042F169 /* AboutViewController.swift */; };
 		7B506027242BB1420042F169 /* AddDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506026242BB1420042F169 /* AddDetailService.swift */; };
 		7B506029242C43200042F169 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506028242C43200042F169 /* NotificationService.swift */; };
+		7B50602D242C61A90042F169 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B50602C242C61A90042F169 /* NotificationViewController.swift */; };
+		7B50602F242C623A0042F169 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B50602E242C623A0042F169 /* NotificationViewModel.swift */; };
+		7B506031242C62470042F169 /* NotificationViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506030242C62470042F169 /* NotificationViewService.swift */; };
 		7B719EF92404DFFC00A42374 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719EF82404DFFC00A42374 /* Prompt.swift */; };
 		7B79637023FA13A30073649E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79636F23FA13A30073649E /* AppDelegate.swift */; };
 		7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79637123FA13A30073649E /* SceneDelegate.swift */; };
@@ -83,6 +86,9 @@
 		7B506024242B9FDA0042F169 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7B506026242BB1420042F169 /* AddDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailService.swift; sourceTree = "<group>"; };
 		7B506028242C43200042F169 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		7B50602C242C61A90042F169 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		7B50602E242C623A0042F169 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		7B506030242C62470042F169 /* NotificationViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewService.swift; sourceTree = "<group>"; };
 		7B719EF82404DFFC00A42374 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		7B79636C23FA13A30073649E /* DailyScorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyScorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B79636F23FA13A30073649E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +191,9 @@
 		7B50602A242C60CF0042F169 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				7B506030242C62470042F169 /* NotificationViewService.swift */,
+				7B50602E242C623A0042F169 /* NotificationViewModel.swift */,
+				7B50602C242C61A90042F169 /* NotificationViewController.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -456,11 +465,13 @@
 				7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */,
 				7B506027242BB1420042F169 /* AddDetailService.swift in Sources */,
 				7B79637A23FA13A30073649E /* DailyScorecard.xcdatamodeld in Sources */,
+				7B50602D242C61A90042F169 /* NotificationViewController.swift in Sources */,
 				7B94AFD72411C26800AEDEC8 /* ScoreProvider.swift in Sources */,
 				7BD4B825242AD10400D894E5 /* ThemeService.swift in Sources */,
 				7B4F92672404C0F500993700 /* PromptEditFlowController.swift in Sources */,
 				7BD4B829242AD64700D894E5 /* ThemeViewService.swift in Sources */,
 				7B94AFDB2411E99100AEDEC8 /* ChartPageViewController.swift in Sources */,
+				7B50602F242C623A0042F169 /* NotificationViewModel.swift in Sources */,
 				7BD6A09D241599A9008FF75A /* Result.swift in Sources */,
 				7B7963AC23FF6F5F0073649E /* PromptEditViewController.swift in Sources */,
 				7B506029242C43200042F169 /* NotificationService.swift in Sources */,
@@ -491,6 +502,7 @@
 				7B4FEAED240CD6AF000AB5AC /* Calendar.swift in Sources */,
 				7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */,
 				7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */,
+				7B506031242C62470042F169 /* NotificationViewService.swift in Sources */,
 				7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */,
 				7B4F92622402D14500993700 /* AppFlowController.swift in Sources */,
 				7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */,

@@ -102,7 +102,6 @@ class AppFlowController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.serviceProvider?.themeService.applyDefaultTheme()
     }
 
     override func loadView() {

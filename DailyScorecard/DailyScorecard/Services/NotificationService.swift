@@ -12,18 +12,33 @@ import UserNotifications
 class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelegate {
     var serviceProvider: ServiceProvider
     private var notificationId: String = "daily.reminder.notification"
-    private var userDefaultScheduleKey = "user.default.schedule.key"
+    private var userDefaultScheduleHourKey = "user.default.schedule.hour.key"
+    private var userDefaultScheduleMinuteKey = "user.default.schedule.minute.key"
     private var userDefaultActiveKey = "user.default.active.key"
 
     private(set) var scheduledHour: Int? {
         get {
-            UserDefaults().object(forKey: userDefaultScheduleKey) as? Int
+            UserDefaults().object(forKey: userDefaultScheduleHourKey) as? Int
         }
         set {
             if let value = newValue {
-                UserDefaults().set(value, forKey: userDefaultScheduleKey)
+                UserDefaults().set(value, forKey: userDefaultScheduleHourKey)
             } else {
-                UserDefaults().removeObject(forKey: userDefaultScheduleKey)
+                UserDefaults().removeObject(forKey: userDefaultScheduleHourKey)
+                self.isActive = false
+            }
+        }
+    }
+    
+    private(set) var scheduledMinute: Int? {
+        get {
+            UserDefaults().object(forKey: userDefaultScheduleMinuteKey) as? Int
+        }
+        set {
+            if let value = newValue {
+                UserDefaults().set(value, forKey: userDefaultScheduleMinuteKey)
+            } else {
+                UserDefaults().removeObject(forKey: userDefaultScheduleMinuteKey)
                 self.isActive = false
             }
         }
@@ -40,14 +55,17 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
 
     func updateSchedule() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
-        self.setSchedule(active: self.isActive, hour: self.scheduledHour)
+        self.setSchedule(active: self.isActive, hour: self.scheduledHour, minute: self.scheduledMinute)
     }
 
-    func setSchedule(active: Bool, hour: Int?) {
-        isActive = active
-        scheduledHour = hour
+    func setSchedule(active: Bool, hour: Int?, minute: Int?) {
 
-        if isActive && scheduledHour != nil {
+        if active && hour != nil && minute != nil {
+
+            isActive = active
+            scheduledHour = hour
+            scheduledMinute = minute
+
             UNUserNotificationCenter.current().getNotificationSettings() { settings in
                 switch settings.authorizationStatus {
                 case .notDetermined:
@@ -61,6 +79,7 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
                 }
             }
         } else {
+            isActive = active
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         }
     }
@@ -69,13 +88,14 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
         let calendar = Calendar.current
         let now = Date()
 
-        guard let scheduledHour = scheduledHour else {
+        guard let scheduledHour = scheduledHour, let scheduledMinute = scheduledMinute  else {
             return nil
         }
 
         var notificationComponents = DateComponents()
         notificationComponents.calendar = calendar
         notificationComponents.hour = scheduledHour
+        notificationComponents.minute = scheduledMinute
 
         if serviceProvider.entryStoreService.getEntries(for: now).toOptional()?.reduce(true, { r,e in r && e.score != .None }) == true {
             if let tomorrow = calendar.date(byAdding: .day, value: 1, to: now) {
@@ -104,6 +124,7 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
             if granted == true && error == nil {
                 self.scheduleNotifications()
             }
+            self.isActive = false
         })
     }
 

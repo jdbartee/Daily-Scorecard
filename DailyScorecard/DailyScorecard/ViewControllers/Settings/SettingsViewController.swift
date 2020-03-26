@@ -60,9 +60,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     var notificationsController: UIViewController {
-        let notificationsController = UIViewController()
-        notificationsController.view.backgroundColor = .systemGroupedBackground
-        notificationsController.title = "Notifications"
+        let notificationsController = NotificationViewController()
+        notificationsController.serviceProvider = self.serviceProvider
         return notificationsController
     }
 

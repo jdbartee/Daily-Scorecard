@@ -22,6 +22,7 @@ class ServiceProvider {
     lazy var chartViewService: ChartViewService = CCHartViewService(self)
 
     lazy var themeViewService: ThemeViewService = ThemeViewService(self)
+    lazy var notificationViewService: NotificationViewService = NotificationViewService(self)
 
     lazy var promptStoreService: PromptStoreService = CoreDataPromptStoreService(self)
     lazy var entryStoreService: EntryStoreService = CoreDataEntryStoreService(self)
