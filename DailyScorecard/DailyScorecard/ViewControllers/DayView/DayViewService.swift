@@ -26,6 +26,9 @@ class InMemoryDayViewService: DayViewService {
     var scoreProvider: ScoreProvider {
         serviceProvider.scoreProvider
     }
+    var notificationService: NotificationService {
+        serviceProvider.notificationService
+    }
 
     func dayViewModel(for date: Date) -> AnyPublisher<DayViewModel, Never> {
         return Future<DayViewModel, Never> { promise in
@@ -60,6 +63,8 @@ class InMemoryDayViewService: DayViewService {
         } else {
             let _ = entryStore.insert(promptId: entry.promptId, date: date, score: score)
         }
+        
+        notificationService.updateSchedule()
     }
 
     init(_ serviceProvider: ServiceProvider) {

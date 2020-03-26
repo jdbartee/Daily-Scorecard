@@ -14,10 +14,7 @@ class AppFlowController: UIViewController {
 
     var cancelBag = CancelBag()
 
-    lazy var serviceProvider: ServiceProvider = {
-        let sp = ServiceProvider()
-        return sp
-    }()
+    var serviceProvider: ServiceProvider?
 
     lazy var ownedNavigationController: UINavigationController = {
         let nav = UINavigationController(rootViewController: self.initialViewController)
@@ -43,7 +40,7 @@ class AppFlowController: UIViewController {
         tabController.navigationItem.setLeftBarButton(self.actionButtonItem, animated: true)
         tabController.selectedViewController = self.dayViewController
 
-        tabController.title = self.serviceProvider.appDetails.appName
+        tabController.title = self.serviceProvider?.appDetails.appName
         return tabController
     }()
 
@@ -105,7 +102,7 @@ class AppFlowController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.serviceProvider.themeService.applyDefaultTheme()
+        self.serviceProvider?.themeService.applyDefaultTheme()
     }
 
     override func loadView() {

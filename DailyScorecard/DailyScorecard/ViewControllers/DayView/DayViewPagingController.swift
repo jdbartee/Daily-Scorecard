@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class DayViewPagingController: UIViewController {
-    var serviceProvider: ServiceProvider!
-    var flowController: AppFlowController!
+    var serviceProvider: ServiceProvider?
+    var flowController: AppFlowController?
 
     lazy var currentDate = initalDate()
 
@@ -104,7 +104,7 @@ class DayViewPagingController: UIViewController {
 
     func newDayViewController() -> DayViewTableController {
         let vc = DayViewTableController()
-        vc.service = self.serviceProvider.dayViewService
+        vc.service = self.serviceProvider?.dayViewService
         return vc
     }
 

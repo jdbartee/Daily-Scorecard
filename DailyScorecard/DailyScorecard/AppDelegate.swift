@@ -8,12 +8,19 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    lazy var serviceProvider: ServiceProvider = {
+        let serviceProvider = ServiceProvider()
+        return serviceProvider
+    }()
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().delegate = serviceProvider.notificationService
         return true
     }
 

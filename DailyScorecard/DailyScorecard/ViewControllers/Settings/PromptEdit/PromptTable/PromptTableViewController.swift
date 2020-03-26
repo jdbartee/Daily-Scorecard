@@ -11,6 +11,7 @@ import Combine
 import UIKit
 
 class PromptTableViewController: UITableViewController, Storyboarded {
+
     enum PromptState: Hashable {
     case active
     case inactive

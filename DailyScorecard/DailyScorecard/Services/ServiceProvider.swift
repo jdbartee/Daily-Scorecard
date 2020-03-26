@@ -27,8 +27,10 @@ class ServiceProvider {
     lazy var entryStoreService: EntryStoreService = CoreDataEntryStoreService(self)
 
     lazy var themeService: ThemeService = ThemeService(self)
+    lazy var notificationService: NotificationService = NotificationService(self)
 
     lazy var scoreProvider: ScoreProvider = ScoreProvider(self)
+    
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*
          The persistent container for the application. This implementation

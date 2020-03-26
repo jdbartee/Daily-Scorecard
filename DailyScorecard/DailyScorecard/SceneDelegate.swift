@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,8 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let appDelegate = (UIApplication.shared.delegate as? AppDelegate) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = AppFlowController()
+        let appFlowController = AppFlowController()
+        appFlowController.serviceProvider = appDelegate.serviceProvider
+        window.rootViewController = appFlowController
         self.window = window
         window.makeKeyAndVisible()
     }
@@ -53,6 +57,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         // Save changes in the application's managed object context when the application transitions to the background.
         // (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { reqs in
+            print(reqs)
+        })
     }
 
 
