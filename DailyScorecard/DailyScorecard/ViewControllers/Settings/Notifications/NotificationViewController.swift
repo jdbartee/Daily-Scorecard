@@ -22,35 +22,18 @@ class NotificationViewController: UIViewController {
     }
     var cancelBag = CancelBag()
 
+    var staticCells: [UITableViewCell] = []
 
-    private lazy var cardView: UIView = {
-        let cardView = UIView()
-        cardView.backgroundColor = .systemBackground
-        cardView.layer.cornerRadius = 8
-        cardView.translatesAutoresizingMaskIntoConstraints = false
-        if let insets = self.serviceProvider?.themeService.cardInsets {
-            cardView.directionalLayoutMargins = insets
-        }
-
-        cardView.addSubview(self.layoutStack)
-
-        return cardView
-    }()
-
-    private lazy var layoutStack: UIStackView = {
-        let layoutStack = UIStackView()
-        layoutStack.translatesAutoresizingMaskIntoConstraints = false
-        layoutStack.axis = .vertical
-        layoutStack.alignment = .fill
-        layoutStack.distribution = .fillProportionally
-        layoutStack.spacing = 8.0
-
-        return layoutStack
+    private lazy var tableView: UITableView = {
+        let tableview = UITableView(frame: .zero, style: .insetGrouped)
+        tableview.translatesAutoresizingMaskIntoConstraints = false
+        tableview.dataSource = self
+        tableview.allowsSelection = false
+        return tableview
     }()
 
     lazy var deniedPrompt: UILabel = {
         let deniedPrompt = UILabel()
-        deniedPrompt.isHidden = true
         deniedPrompt.font = .preferredFont(forTextStyle: .body)
         deniedPrompt.translatesAutoresizingMaskIntoConstraints = false
         deniedPrompt.numberOfLines = 0
@@ -59,9 +42,21 @@ class NotificationViewController: UIViewController {
         return deniedPrompt
     }()
 
+    lazy var deniedPromptCell: UITableViewCell = {
+        let cell = UITableViewCell(frame: .zero)
+        cell.contentView.addSubview(self.deniedPrompt)
+
+        NSLayoutConstraint.activate([
+            self.deniedPrompt.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+            self.deniedPrompt.bottomAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.bottomAnchor),
+            self.deniedPrompt.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            self.deniedPrompt.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor),
+        ])
+        return cell
+    }()
+
     lazy var mainPrompt: UILabel = {
         let mainPrompt = UILabel()
-        mainPrompt.isHidden = true
         mainPrompt.font = .preferredFont(forTextStyle: .body)
         mainPrompt.translatesAutoresizingMaskIntoConstraints = false
         mainPrompt.numberOfLines = 0
@@ -69,32 +64,22 @@ class NotificationViewController: UIViewController {
         return mainPrompt
     }()
 
-    lazy var toggleFrame: UIView = {
-        let toggleFrame = UIView()
-        toggleFrame.isHidden = true
-        toggleFrame.translatesAutoresizingMaskIntoConstraints = false
-
-        toggleFrame.addSubview(self.toggleSwitchLabel)
-        toggleFrame.addSubview(self.toggleSwitch)
+    lazy var mainPrompCell: UITableViewCell = {
+        let cell = UITableViewCell(frame: .zero)
+        cell.contentView.addSubview(self.mainPrompt)
 
         NSLayoutConstraint.activate([
-            self.toggleSwitchLabel.leadingAnchor.constraint(equalTo: toggleFrame.leadingAnchor),
-            self.toggleSwitchLabel.topAnchor.constraint(equalTo: toggleFrame.topAnchor),
-            self.toggleSwitchLabel.bottomAnchor.constraint(equalTo: toggleFrame.bottomAnchor),
-
-            self.toggleSwitch.trailingAnchor.constraint(equalTo: toggleFrame.trailingAnchor),
-            self.toggleSwitch.topAnchor.constraint(greaterThanOrEqualTo: toggleFrame.topAnchor),
-            self.toggleSwitch.bottomAnchor.constraint(lessThanOrEqualTo: toggleFrame.bottomAnchor),
-
-            self.toggleSwitchLabel.centerYAnchor.constraint(equalTo: self.toggleSwitch.centerYAnchor),
-            self.toggleSwitch.leadingAnchor.constraint(greaterThanOrEqualTo: self.toggleSwitchLabel.trailingAnchor),
+            self.mainPrompt.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+            self.mainPrompt.bottomAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.bottomAnchor),
+            self.mainPrompt.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            self.mainPrompt.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor),
         ])
-        return toggleFrame
+        return cell
     }()
 
     lazy var toggleSwitch: UISwitch = {
         let toggleSwitch = UISwitch()
-        toggleSwitch.translatesAutoresizingMaskIntoConstraints = false
+        toggleSwitch.translatesAutoresizingMaskIntoConstraints = true
         toggleSwitch.addTarget(self, action: #selector(switchFlipped(_:)), for: .valueChanged)
         return toggleSwitch
     }()
@@ -113,27 +98,18 @@ class NotificationViewController: UIViewController {
         return toggleSwitchLabel
     }()
 
-    lazy var timeFrame: UIView = {
-        let timeFrame = UIView()
-        timeFrame.isHidden = true
-        timeFrame.translatesAutoresizingMaskIntoConstraints = false
-
-        timeFrame.addSubview(self.timeLabel)
-        timeFrame.addSubview(self.timePicker)
+    lazy var toggleCell: UITableViewCell = {
+        let cell = UITableViewCell(frame: .zero)
+        cell.contentView.addSubview(self.toggleSwitchLabel)
+        cell.accessoryView = self.toggleSwitch
 
         NSLayoutConstraint.activate([
-            self.timeLabel.topAnchor.constraint(equalTo: timeFrame.topAnchor),
-            self.timeLabel.leadingAnchor.constraint(equalTo: timeFrame.leadingAnchor),
-            self.timeLabel.trailingAnchor.constraint(equalTo: timeFrame.trailingAnchor),
-
-            self.timePicker.bottomAnchor.constraint(equalTo: timeFrame.bottomAnchor),
-            self.timePicker.leadingAnchor.constraint(equalTo: timeFrame.leadingAnchor),
-            self.timePicker.trailingAnchor.constraint(equalTo: timeFrame.trailingAnchor),
-
-            self.timePicker.topAnchor.constraint(greaterThanOrEqualTo: self.timeLabel.bottomAnchor)
+            self.toggleSwitchLabel.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+            self.toggleSwitchLabel.bottomAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.bottomAnchor),
+            self.toggleSwitchLabel.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            self.toggleSwitchLabel.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor),
         ])
-
-        return timeFrame
+        return cell
     }()
 
     lazy var timeLabel: UILabel = {
@@ -159,6 +135,26 @@ class NotificationViewController: UIViewController {
         return timePicker
     }()
 
+    lazy var timePickerCell: UITableViewCell = {
+        let cell = UITableViewCell()
+        cell.contentView.addSubview(self.timeLabel)
+        cell.contentView.addSubview(self.timePicker)
+
+        NSLayoutConstraint.activate([
+            self.timeLabel.topAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.topAnchor),
+            self.timeLabel.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            self.timeLabel.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor),
+
+            self.timePicker.bottomAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.bottomAnchor),
+            self.timePicker.leadingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.leadingAnchor),
+            self.timePicker.trailingAnchor.constraint(equalTo: cell.contentView.layoutMarginsGuide.trailingAnchor),
+
+            self.timePicker.topAnchor.constraint(greaterThanOrEqualTo: self.timeLabel.bottomAnchor)
+        ])
+
+        return cell
+    }()
+
     @objc private func timeChanged(_ sender: Any) {
         let date = self.timePicker.date
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
@@ -170,59 +166,50 @@ class NotificationViewController: UIViewController {
 
     lazy var layoutConstraints: [NSLayoutConstraint] = {
         return [
-            self.cardView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            self.cardView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            self.cardView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            self.cardView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-
-            self.layoutStack.topAnchor.constraint(equalTo: self.cardView.layoutMarginsGuide.topAnchor),
-            self.layoutStack.leadingAnchor.constraint(equalTo: self.cardView.layoutMarginsGuide.leadingAnchor),
-            self.layoutStack.trailingAnchor.constraint(equalTo: self.cardView.layoutMarginsGuide.trailingAnchor),
-            self.layoutStack.bottomAnchor.constraint(lessThanOrEqualTo: self.cardView.layoutMarginsGuide.bottomAnchor)
+            self.tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ]
     }()
 
     func updateViewState() {
-        UIView.animate(withDuration: 0.25, animations: {
-            switch self.model {
-            case .none:
-                self.deniedPrompt.isHidden = true
-                self.mainPrompt.isHidden = true
-                self.toggleFrame.isHidden = true
-                self.timeFrame.isHidden = true
+        let newCells: [UITableViewCell]
+        switch self.model {
+        case .none:
+            newCells = []
 
-            case .denied:
-                self.deniedPrompt.isHidden = false
-                self.mainPrompt.isHidden = false
-                self.toggleFrame.isHidden = false
-                self.timeFrame.isHidden = true
+        case .denied:
+            newCells = [self.deniedPromptCell, self.mainPrompCell, self.toggleCell]
+            self.toggleSwitch.setOn(false, animated: false)
+            self.toggleSwitch.isEnabled = false
 
-                self.toggleSwitch.setOn(false, animated: false)
-                self.toggleSwitch.isEnabled = false
+        case .off:
+            newCells = [self.mainPrompCell, self.toggleCell]
+            self.toggleSwitch.isEnabled = true
 
-            case .off:
-                self.deniedPrompt.isHidden = true
-                self.mainPrompt.isHidden = false
-                self.toggleFrame.isHidden = false
-                self.timeFrame.isHidden = true
-
-                self.toggleSwitch.isEnabled = true
-
-            case .on(hour: let hour, minute: let minute):
-                self.deniedPrompt.isHidden = true
-                self.mainPrompt.isHidden = false
-                self.toggleFrame.isHidden = false
-                self.timeFrame.isHidden = false
-
-                self.toggleSwitch.isOn = true
-                self.toggleSwitch.isEnabled = true
-                if let date = Calendar.current.date(from: DateComponents(calendar: Calendar.current, hour: hour, minute: minute)) {
-                    self.timePicker.setDate(date, animated: false)
-                }
+        case .on(hour: let hour, minute: let minute):
+            newCells = [self.mainPrompCell, self.toggleCell, self.timePickerCell]
+            self.toggleSwitch.isOn = true
+            self.toggleSwitch.isEnabled = true
+            if let date = Calendar.current.date(from: DateComponents(calendar: Calendar.current, hour: hour, minute: minute)) {
+                self.timePicker.setDate(date, animated: false)
             }
-            self.layoutStack.layoutIfNeeded()
-        }, completion: { _ in
-        })
+        }
+
+        self.tableView.beginUpdates()
+
+        let diff = newCells.difference(from: self.staticCells)
+        self.staticCells = newCells
+        for d in diff {
+            switch d {
+            case .insert(let offset, _, _):
+                tableView.insertRows(at: [IndexPath(row: offset, section: 0)], with: .automatic)
+            case .remove(let offset, _, _):
+                tableView.deleteRows(at: [IndexPath(row: offset, section: 0)], with: .automatic)
+            }
+        }
+        self.tableView.endUpdates()
     }
 
     private func queryModel() {
@@ -247,17 +234,19 @@ class NotificationViewController: UIViewController {
     override func loadView() {
         self.title = "Notifications"
         self.view = UIView()
-        if let insets = self.serviceProvider?.themeService.viewInsets {
-            view.directionalLayoutMargins = insets
-            view.preservesSuperviewLayoutMargins = true
-        }
+
         view.backgroundColor = .systemGroupedBackground
 
-        view.addSubview(cardView)
+        view.addSubview(tableView)
+    }
+}
 
-        self.layoutStack.addArrangedSubview(self.deniedPrompt)
-        self.layoutStack.addArrangedSubview(self.mainPrompt)
-        self.layoutStack.addArrangedSubview(self.toggleFrame)
-        self.layoutStack.addArrangedSubview(self.timeFrame)
+extension NotificationViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.staticCells.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return staticCells[indexPath.row]
     }
 }
