@@ -22,7 +22,10 @@ class ThemeService: BaseService {
     private var tintColors: [String:UIColor] = [
         "Orange": .systemOrange,
         "Purple": .systemPurple,
-        "Blue": .systemBlue
+        "Blue": .systemBlue,
+        "Green": .systemGreen,
+        "Cyan": .cyan,
+        "Red": .systemRed,
     ]
 
     func themes() -> AnyPublisher<[Theme], Never> {

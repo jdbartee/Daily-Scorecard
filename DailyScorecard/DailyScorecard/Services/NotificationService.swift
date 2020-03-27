@@ -127,8 +127,9 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { granted, error in
             if granted == true && error == nil {
                 self.scheduleNotifications()
+            } else {
+                self.isActive = false
             }
-            self.isActive = false
         })
     }
 
