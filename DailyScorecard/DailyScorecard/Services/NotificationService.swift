@@ -53,6 +53,8 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
         }
     }
 
+    private(set) var denied: Bool = false
+
     func updateSchedule() {
         UNUserNotificationCenter.current().removeAllDeliveredNotifications()
         self.setSchedule(active: self.isActive, hour: self.scheduledHour, minute: self.scheduledMinute)
@@ -74,19 +76,20 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
                     self.scheduleNotifications()
                 case .denied:
                     self.isActive = false
+                    self.denied = true
                 @unknown default:
                     break
                 }
             }
         } else {
-            isActive = active
+            isActive = false
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         }
     }
 
     private func nextNotificationDateComponents() -> DateComponents? {
         let calendar = Calendar.current
-        let now = Date()
+        let now = calendar.today()
 
         guard let scheduledHour = scheduledHour, let scheduledMinute = scheduledMinute  else {
             return nil
@@ -107,6 +110,7 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
 
     }
     private func scheduleNotifications() {
+        self.denied = false
         if let dateComponents = nextNotificationDateComponents() {
             let content = UNMutableNotificationContent()
             content.title = serviceProvider.appDetails.appName
@@ -128,7 +132,15 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
         })
     }
 
+    func checkSettings(_ completion: (() -> Void)?) {
+        UNUserNotificationCenter.current().getNotificationSettings() { settings in
+            self.denied = settings.authorizationStatus == .denied
+            completion?()
+        }
+    }
+
     init(_ serviceProvider: ServiceProvider) {
         self.serviceProvider = serviceProvider
+        super.init()
     }
 }
