@@ -10,25 +10,11 @@ import Foundation
 import UIKit
 import Combine
 
-protocol DayViewTableControllerDelegate {
-    func dateUpdatedTo(date: Date)
-}
-
 class DayViewTableController: UIViewController {
 
     private var entries = [DayViewModel.DayViewEntry]()
 
     var service: DayViewService?
-    var delegate: DayViewTableControllerDelegate? {
-        didSet {
-            switch state {
-            case .value(model: let model):
-                delegate?.dateUpdatedTo(date: model.date)
-            default:
-                break
-            }
-        }
-    }
     var cancelBag = CancelBag()
 
     var state: DayViewViewModel = .none {
@@ -36,7 +22,6 @@ class DayViewTableController: UIViewController {
             switch state {
             case .value(let model):
                 self.setEntries(model.entries, for: tableView)
-                delegate?.dateUpdatedTo(date: model.date)
             default:
                 self.setEntries([], for: tableView)
                 break

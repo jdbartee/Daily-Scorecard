@@ -59,7 +59,6 @@ class AppFlowController: UIViewController {
     lazy var dayViewController: UIViewController = {
         let vc = DayViewPagingController()
         vc.serviceProvider = self.serviceProvider
-        vc.flowController = self
         vc.title = "Day View"
         vc.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
         vc.navigationItem.setLeftBarButton(self.chartsButtonItem, animated: true)

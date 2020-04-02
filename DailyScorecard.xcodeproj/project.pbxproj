@@ -25,6 +25,8 @@
 		7B50602D242C61A90042F169 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B50602C242C61A90042F169 /* NotificationViewController.swift */; };
 		7B50602F242C623A0042F169 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B50602E242C623A0042F169 /* NotificationViewModel.swift */; };
 		7B506031242C62470042F169 /* NotificationViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506030242C62470042F169 /* NotificationViewService.swift */; };
+		7B506033243639FD0042F169 /* DayViewPagingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B506032243639FD0042F169 /* DayViewPagingModel.swift */; };
+		7B50603524363AAA0042F169 /* DayViewPagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B50603424363AAA0042F169 /* DayViewPagingService.swift */; };
 		7B719EF92404DFFC00A42374 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B719EF82404DFFC00A42374 /* Prompt.swift */; };
 		7B79637023FA13A30073649E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79636F23FA13A30073649E /* AppDelegate.swift */; };
 		7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B79637123FA13A30073649E /* SceneDelegate.swift */; };
@@ -89,6 +91,8 @@
 		7B50602C242C61A90042F169 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		7B50602E242C623A0042F169 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7B506030242C62470042F169 /* NotificationViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewService.swift; sourceTree = "<group>"; };
+		7B506032243639FD0042F169 /* DayViewPagingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewPagingModel.swift; sourceTree = "<group>"; };
+		7B50603424363AAA0042F169 /* DayViewPagingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewPagingService.swift; sourceTree = "<group>"; };
 		7B719EF82404DFFC00A42374 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		7B79636C23FA13A30073649E /* DailyScorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyScorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B79636F23FA13A30073649E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,9 +175,11 @@
 		7B4FEAF22410BD82000AB5AC /* DayView */ = {
 			isa = PBXGroup;
 			children = (
+				7B506032243639FD0042F169 /* DayViewPagingModel.swift */,
+				7B50603424363AAA0042F169 /* DayViewPagingService.swift */,
+				7B4FEAF02410BD61000AB5AC /* DayViewPagingController.swift */,
 				7B79639A23FA234E0073649E /* DayViewModel.swift */,
 				7B7963A323FB96690073649E /* DayViewService.swift */,
-				7B4FEAF02410BD61000AB5AC /* DayViewPagingController.swift */,
 				7B105BD8241F08AF00D8581A /* DayViewTableController.swift */,
 				7B79639F23FA45580073649E /* DayViewEntryCell.swift */,
 			);
@@ -479,6 +485,7 @@
 				7B719EF92404DFFC00A42374 /* Prompt.swift in Sources */,
 				7B7963AE23FF6F870073649E /* PromptEditViewModel.swift in Sources */,
 				7B7963A423FB96690073649E /* DayViewService.swift in Sources */,
+				7B506033243639FD0042F169 /* DayViewPagingModel.swift in Sources */,
 				7BD4B823242AD04300D894E5 /* Theme.swift in Sources */,
 				7B4FEAE9240C8D93000AB5AC /* TestSwiftUI.swift in Sources */,
 				7B7963AA23FE4E2A0073649E /* PromptTableViewService.swift in Sources */,
@@ -506,6 +513,7 @@
 				7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */,
 				7B4F92622402D14500993700 /* AppFlowController.swift in Sources */,
 				7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */,
+				7B50603524363AAA0042F169 /* DayViewPagingService.swift in Sources */,
 				7B98A9C124299227002BA9D1 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
