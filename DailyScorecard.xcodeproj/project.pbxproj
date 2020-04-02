@@ -191,8 +191,8 @@
 		7B50602A242C60CF0042F169 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				7B506030242C62470042F169 /* NotificationViewService.swift */,
 				7B50602E242C623A0042F169 /* NotificationViewModel.swift */,
+				7B506030242C62470042F169 /* NotificationViewService.swift */,
 				7B50602C242C61A90042F169 /* NotificationViewController.swift */,
 			);
 			path = Notifications;

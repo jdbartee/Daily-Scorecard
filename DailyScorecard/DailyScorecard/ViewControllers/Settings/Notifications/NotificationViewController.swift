@@ -220,10 +220,19 @@ class NotificationViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.queryModel()
+
+        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+            self.queryModel()
+            })
+            .store(in: &self.cancelBag)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.cancelBag.cancelAll()
     }
 

@@ -24,15 +24,19 @@ class ChartPageViewController: UIViewController {
     var cancelBag = CancelBag()
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         self.title = "Weekly Trends"
         self.queryData(for: state.activeFilter)
+
+        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { _ in
+                self.queryData(for: self.filterController.selectedFilter)
+            })
+            .store(in: &cancelBag)
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         self.cancelBag.cancelAll()
     }
 
