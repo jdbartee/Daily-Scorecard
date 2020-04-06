@@ -13,9 +13,6 @@ class DayViewPagingController: UIViewController {
     var serviceProvider: ServiceProvider?
     var dataSource = DayViewPagingDataSource()
 
-    private var prevHash: Int = 0
-    private var nextHash: Int = 0
-
     var service: DayViewPagingService? {
         self.serviceProvider?.dayViewPagingService
     }
@@ -182,7 +179,6 @@ class DayViewPagingController: UIViewController {
 
                 if let prevDate = model.prevDate {
                     let vc = self.getReusableDayViewTableController()
-                    self.prevHash = vc.hash
                     vc.queryData(for: prevDate)
                     self.dataSource.previousViewController = vc
                 } else {
@@ -191,7 +187,6 @@ class DayViewPagingController: UIViewController {
 
                 if let nextDate = model.nextDate {
                     let vc = self.getReusableDayViewTableController()
-                    self.nextHash = vc.hash
                     vc.queryData(for: nextDate)
                     self.dataSource.nextViewController = vc
                 } else {
@@ -284,10 +279,13 @@ extension DayViewPagingController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
             if let vc = pageViewController.viewControllers?[0] {
-                if vc.hash == prevHash, let date = self.prevDate {
+                if vc == self.dataSource.previousViewController, let date = self.prevDate {
                     self.queryData(for: date)
-                } else if vc.hash == nextHash, let date = self.nextDate {
+                } else if vc == self.dataSource.nextViewController, let date = self.nextDate {
                     self.queryData(for: date)
+                } else {
+                    print("A Major error occured")
+                    self.reloadCurrentState()
                 }
             }
         }

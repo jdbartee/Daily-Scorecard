@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    static var appHighlightColor: UIColor = UIColor.init(named: "PurpleHighlight")!
     func contrastColor() -> UIColor {
         var r: CGFloat = 0.0
         var g: CGFloat = 0.0
