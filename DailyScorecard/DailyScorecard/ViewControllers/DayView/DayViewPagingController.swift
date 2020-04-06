@@ -11,6 +11,7 @@ import UIKit
 
 class DayViewPagingController: UIViewController {
     var serviceProvider: ServiceProvider?
+    var dataSource = DayViewPagingDataSource()
 
     private var prevHash: Int = 0
     private var nextHash: Int = 0
@@ -21,19 +22,37 @@ class DayViewPagingController: UIViewController {
 
     var state: DayViewPagingState = .none {
         didSet {
+            guard oldValue != state else {
+                return
+            }
+            
             self.updateState(oldValue)
         }
     }
-    var cancelBag = CancelBag()
-    
-    lazy var pageController: UIPageViewController = {
-        let dvc = getReusableDayViewTableController()
-        dvc.queryData(for: initalDate())
 
+    var prevDate: Date? {
+        switch state {
+        case .historic(let model), .today(let model):
+            return model.prevDate
+        default:
+            return nil
+        }
+    }
+    var nextDate: Date? {
+        switch state {
+        case .historic(let model), .today(let model):
+            return model.nextDate
+        default:
+            return nil
+        }
+    }
+
+    var cancelBag = CancelBag()
+
+    lazy var pageController: UIPageViewController = {
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        vc.dataSource = self
+        vc.dataSource = self.dataSource
         vc.delegate = self
-        vc.setViewControllers([dvc], direction: .reverse, animated: true, completion: nil)
 
         vc.view.addSubview(self.dateView)
 
@@ -46,9 +65,6 @@ class DayViewPagingController: UIViewController {
         return vc
     }()
 
-    func initalDate() -> Date {
-        Calendar.current.startOfDay(for: Date())
-    }
 
     lazy var dateLabel: UILabel = {
         var label = UILabel()
@@ -71,11 +87,14 @@ class DayViewPagingController: UIViewController {
     }()
 
     lazy var dateView: UIView = {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dateViewTapped(_:)))
+
         let view = UIVisualEffectView()
         view.effect = blurEffect
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.addGestureRecognizer(tapGesture)
 
 
         vibrancyView.contentView.addSubview(self.dateLabel)
@@ -99,10 +118,27 @@ class DayViewPagingController: UIViewController {
         return view
     }()
 
+    @objc func dateViewTapped(_ sender: Any) {
+        switch state {
+        case .today(_):
+            break
+        default:
+            let dvc = self.getReusableDayViewTableController()
+            dvc.queryData(for: Calendar.current.today())
+            self.pageController.setViewControllers([dvc], direction: .forward, animated: true) { _ in
+                self.queryData()
+            }
+        }
+    }
+
     lazy var reusableDayViewControllers = Set<DayViewTableController>()
 
     func getReusableDayViewTableController() -> DayViewTableController {
-        if let vc = reusableDayViewControllers.filter({$0.parent == nil}).first {
+        if let vc = reusableDayViewControllers.filter({ vc in
+            vc != self.pageController.viewControllers?[0] &&
+                vc != self.dataSource.previousViewController &&
+                vc != self.dataSource.nextViewController
+        }).first {
             vc.prepareForReuse()
             return vc
         } else {
@@ -133,20 +169,45 @@ class DayViewPagingController: UIViewController {
     }
 
     private func updateState(_ oldValue: DayViewPagingState) {
-        pageController.dataSource = nil
-        switch state {
-        case .historic(let model), .today(let model):
-            dateLabel.text = model.currentDateLabel
-            if let dvc = pageController.viewControllers?[0] as? DayViewTableController {
-                dvc.queryData(for: model.currentDate)
+        DispatchQueue.main.async {
+            self.pageController.dataSource = nil
+
+            switch self.state {
+            case .historic(let model), .today(let model):
+                self.dateLabel.text = model.currentDateLabel
+
+                if let dvc = self.pageController.viewControllers?[0] as? DayViewTableController {
+                    dvc.queryData(for: model.currentDate)
+                }
+
+                if let prevDate = model.prevDate {
+                    let vc = self.getReusableDayViewTableController()
+                    self.prevHash = vc.hash
+                    vc.queryData(for: prevDate)
+                    self.dataSource.previousViewController = vc
+                } else {
+                    self.dataSource.previousViewController = nil
+                }
+
+                if let nextDate = model.nextDate {
+                    let vc = self.getReusableDayViewTableController()
+                    self.nextHash = vc.hash
+                    vc.queryData(for: nextDate)
+                    self.dataSource.nextViewController = vc
+                } else {
+                    self.dataSource.nextViewController = nil
+                }
+
+            case .none:
+                self.pageController.setViewControllers([UIViewController()], direction: .forward, animated: false, completion: nil)
+                self.dataSource.nextViewController = nil
+                self.dataSource.previousViewController = nil
+                self.dateLabel.text = nil
             }
 
-        default:
-            dateLabel.text = nil
-        }
 
-        dateLabel.sizeToFit()
-        pageController.dataSource = self
+            self.pageController.dataSource = self.dataSource
+        }
     }
 
     private func reloadCurrentState() {
@@ -161,12 +222,15 @@ class DayViewPagingController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        reloadCurrentState()
-        NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-            .receive(on: DispatchQueue.main)
-            .sink() { _ in
-                self.reloadCurrentState()
-            }.store(in: &cancelBag)
+        let dvc = self.getReusableDayViewTableController()
+        pageController.setViewControllers([dvc], direction: .forward, animated: false) { _ in
+            self.reloadCurrentState()
+            NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+                .receive(on: DispatchQueue.main)
+                .sink() { _ in
+                    self.reloadCurrentState()
+            }.store(in: &self.cancelBag)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -177,7 +241,6 @@ class DayViewPagingController: UIViewController {
         view = UIView()
         view.backgroundColor = .systemGroupedBackground
         install(child: self.pageController)
-        self.queryData()
     }
 
     func install(child: UIViewController) {
@@ -199,74 +262,34 @@ class DayViewPagingController: UIViewController {
     }
 }
 
-extension DayViewPagingController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+class DayViewPagingDataSource: NSObject, UIPageViewControllerDataSource {
 
-    var prevDate: Date? {
-        switch state {
-        case .historic(let model), .today(let model):
-            return model.prevDate
-        default:
-            return nil
-        }
-    }
-    var nextDate: Date? {
-        switch state {
-        case .historic(let model), .today(let model):
-            return model.nextDate
-        default:
-            return nil
-        }
-    }
+    var previousViewController: UIViewController?
+    var nextViewController: UIViewController?
+
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let _ = prevDate else {
-            return nil
-        }
-
-        let vc = getReusableDayViewTableController()
-        prevHash = vc.hash
-        return vc
+        guard viewController != self.previousViewController else { return nil }
+        return self.previousViewController
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let _ = nextDate else {
-            return nil
-        }
-
-        let vc = getReusableDayViewTableController()
-        nextHash = vc.hash
-        return vc
+        guard viewController != self.nextViewController else { return nil }
+        return self.nextViewController
     }
+}
 
-    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        switch state {
-        case .historic(let model), .today(let model):
-            if let vc = pendingViewControllers[0] as? DayViewTableController {
-                if vc.hash == prevHash, let date = model.prevDate {
-                    vc.queryData(for: date)
-                } else if vc.hash == nextHash, let date = model.nextDate {
-                    vc.queryData(for: date)
-                }
-            }
-        default:
-            break
-        }
-    }
+extension DayViewPagingController: UIPageViewControllerDelegate {
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
-        switch state {
-        case .historic(let model), .today(let model):
-            if let vc = pageViewController.viewControllers?[0] as? DayViewTableController {
-                if vc.hash == prevHash, let date = model.prevDate {
+            if let vc = pageViewController.viewControllers?[0] {
+                if vc.hash == prevHash, let date = self.prevDate {
                     self.queryData(for: date)
-                } else if vc.hash == nextHash, let date = model.nextDate {
+                } else if vc.hash == nextHash, let date = self.nextDate {
                     self.queryData(for: date)
                 }
             }
-        default:
-            break
-        }
         }
     }
 }

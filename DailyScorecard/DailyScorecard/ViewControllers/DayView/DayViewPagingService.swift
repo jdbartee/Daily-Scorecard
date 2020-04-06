@@ -28,7 +28,16 @@ class DayViewPagingService: BaseService {
     func model(for date: Date) -> AnyPublisher<DayViewPagingState, Never> {
 
         if Calendar.current.isDateInToday(date) {
-            return model()
+            return Future<DayViewPagingState, Never> { promise in
+                let date = Calendar.current.today()
+                let model = DayViewPagingModel(
+                    prevDate: Calendar.current.prevDay(date),
+                    nextDate: nil,
+                    currentDate: date,
+                    currentDateLabel: "Today")
+
+                promise(.success(.historic(model)))
+            }.eraseToAnyPublisher()
         } else {
             return Future<DayViewPagingState, Never> { promise in
                 let model = DayViewPagingModel(

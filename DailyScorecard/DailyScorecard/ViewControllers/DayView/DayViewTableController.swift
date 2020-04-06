@@ -19,6 +19,10 @@ class DayViewTableController: UIViewController {
 
     var state: DayViewViewModel = .none {
         didSet {
+            guard oldValue != state else {
+                return
+            }
+
             switch state {
             case .value(let model):
                 self.setEntries(model.entries, for: tableView)

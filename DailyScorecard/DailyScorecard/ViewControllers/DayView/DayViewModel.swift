@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum DayViewViewModel {
+enum DayViewViewModel: Equatable {
     case none
     case error(error: String)
     case value(model: DayViewModel)
 }
 
-struct DayViewModel {
+struct DayViewModel: Equatable {
     struct DayViewEntry: Hashable {
         var entryId: UUID?
         var promptId: UUID

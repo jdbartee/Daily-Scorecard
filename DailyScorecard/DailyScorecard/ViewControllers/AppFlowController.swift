@@ -18,6 +18,7 @@ class AppFlowController: UIViewController {
 
     lazy var ownedNavigationController: UINavigationController = {
         let nav = UINavigationController(rootViewController: self.initialViewController)
+        nav.navigationBar.prefersLargeTitles = true
         return nav
     }()
 
