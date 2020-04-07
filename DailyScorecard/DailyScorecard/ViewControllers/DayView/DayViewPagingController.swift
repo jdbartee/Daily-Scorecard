@@ -19,10 +19,6 @@ class DayViewPagingController: UIViewController {
 
     var state: DayViewPagingState = .none {
         didSet {
-            guard oldValue != state else {
-                return
-            }
-            
             self.updateState(oldValue)
         }
     }
@@ -132,7 +128,7 @@ class DayViewPagingController: UIViewController {
 
     func getReusableDayViewTableController() -> DayViewTableController {
         if let vc = reusableDayViewControllers.filter({ vc in
-            vc != self.pageController.viewControllers?[0] &&
+            vc != self.pageController.viewControllers?.first &&
                 vc != self.dataSource.previousViewController &&
                 vc != self.dataSource.nextViewController
         }).first {
@@ -173,8 +169,12 @@ class DayViewPagingController: UIViewController {
             case .historic(let model), .today(let model):
                 self.dateLabel.text = model.currentDateLabel
 
-                if let dvc = self.pageController.viewControllers?[0] as? DayViewTableController {
+                if let dvc = self.pageController.viewControllers?.first as? DayViewTableController {
                     dvc.queryData(for: model.currentDate)
+                } else {
+                    let dvc = self.getReusableDayViewTableController()
+                    dvc.queryData(for: model.currentDate)
+                    self.pageController.setViewControllers([dvc], direction: .forward, animated: false, completion: nil)
                 }
 
                 if let prevDate = model.prevDate {
@@ -217,15 +217,7 @@ class DayViewPagingController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        let dvc = self.getReusableDayViewTableController()
-        pageController.setViewControllers([dvc], direction: .forward, animated: false) { _ in
-            self.reloadCurrentState()
-            NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
-                .receive(on: DispatchQueue.main)
-                .sink() { _ in
-                    self.reloadCurrentState()
-            }.store(in: &self.cancelBag)
-        }
+        self.reloadCurrentState()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -278,7 +270,7 @@ extension DayViewPagingController: UIPageViewControllerDelegate {
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
-            if let vc = pageViewController.viewControllers?[0] {
+            if let vc = pageViewController.viewControllers?.first {
                 if vc == self.dataSource.previousViewController, let date = self.prevDate {
                     self.queryData(for: date)
                 } else if vc == self.dataSource.nextViewController, let date = self.nextDate {

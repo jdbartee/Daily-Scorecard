@@ -19,17 +19,7 @@ class DayViewTableController: UIViewController {
 
     var state: DayViewViewModel = .none {
         didSet {
-            guard oldValue != state else {
-                return
-            }
-
-            switch state {
-            case .value(let model):
-                self.setEntries(model.entries, for: tableView)
-            default:
-                self.setEntries([], for: tableView)
-                break
-            }
+            self.updateState()
         }
     }
 
@@ -85,6 +75,19 @@ class DayViewTableController: UIViewController {
     func prepareForReuse() {
         self.state = .none
     }
+
+    fileprivate func updateState() {
+        DispatchQueue.main.async {
+            switch self.state {
+            case .value(let model):
+                self.setEntries(model.entries, for: self.tableView)
+            default:
+                self.setEntries([], for: self.tableView)
+                break
+            }
+        }
+    }
+
 }
 
 extension DayViewTableController: UITableViewDelegate {

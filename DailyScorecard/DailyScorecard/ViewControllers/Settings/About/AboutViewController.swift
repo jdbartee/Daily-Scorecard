@@ -108,6 +108,7 @@ class AboutViewController: UIViewController {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.largeTitleDisplayMode = .never
         self.titleLabel.text = "\(appName) - \(appVersion)"
         self.copyrightLabel.text = copyright
     }
