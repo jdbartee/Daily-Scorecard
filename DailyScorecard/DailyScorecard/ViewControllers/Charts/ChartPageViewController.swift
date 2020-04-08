@@ -35,6 +35,7 @@ class ChartPageViewController: UIViewController {
             })
             .store(in: &cancelBag)
     }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.cancelBag.cancelAll()

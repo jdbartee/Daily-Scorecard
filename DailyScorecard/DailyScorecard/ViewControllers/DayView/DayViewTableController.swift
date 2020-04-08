@@ -13,6 +13,7 @@ import Combine
 class DayViewTableController: UIViewController {
 
     private var entries = [DayViewModel.DayViewEntry]()
+    private var cellsNeedReload: Bool = false
 
     var service: DayViewService?
     var cancelBag = CancelBag()
@@ -48,6 +49,7 @@ class DayViewTableController: UIViewController {
     }()
 
     override func viewWillAppear(_ animated: Bool) {
+        self.cellsNeedReload = true
         if let date = date {
             self.queryData(for: date)
         }
@@ -106,6 +108,7 @@ extension DayViewTableController: UITableViewDataSource {
     func setEntries(_ newEntries: [DayViewModel.DayViewEntry], for tableView: UITableView) {
         tableView.beginUpdates()
         let diff = newEntries.map({$0.entryId}).difference(from: entries.map({$0.entryId}))
+
         entries = newEntries
         for d in diff {
             switch d {
@@ -115,7 +118,11 @@ extension DayViewTableController: UITableViewDataSource {
                 tableView.deleteRows(at: [IndexPath(row: offset, section: 0)], with: .automatic)
             }
         }
+        if cellsNeedReload {
+            tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
+        }
         tableView.endUpdates()
+        cellsNeedReload = false
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

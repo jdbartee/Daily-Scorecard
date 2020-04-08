@@ -32,14 +32,14 @@ class DayViewEntryCell: UITableViewCell {
     private lazy var scoreFrame: UIView = {
         let scoreFrame = UIView()
         scoreFrame.translatesAutoresizingMaskIntoConstraints = false
-        scoreFrame.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 70, bottom: 0, trailing: 0)
+        scoreFrame.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
 
         scoreFrame.addSubview(self.scoreSelectionView)
 
         NSLayoutConstraint.activate([
             self.scoreSelectionView.topAnchor.constraint(equalTo: scoreFrame.layoutMarginsGuide.topAnchor),
             self.scoreSelectionView.bottomAnchor.constraint(equalTo: scoreFrame.layoutMarginsGuide.bottomAnchor),
-            self.scoreSelectionView.leadingAnchor.constraint(equalTo: scoreFrame.layoutMarginsGuide.leadingAnchor),
+            self.scoreSelectionView.leadingAnchor.constraint(greaterThanOrEqualTo: scoreFrame.layoutMarginsGuide.leadingAnchor),
             self.scoreSelectionView.trailingAnchor.constraint(equalTo: scoreFrame.layoutMarginsGuide.trailingAnchor),
         ])
 
@@ -50,6 +50,7 @@ class DayViewEntryCell: UITableViewCell {
         let scoreStackView = OptionSelectionView()
         scoreStackView.translatesAutoresizingMaskIntoConstraints = false
         scoreStackView.selectedOptionIndexDidChange = self.scoreIndexChanged(idx:)
+        scoreStackView.spacing = 12
         return scoreStackView
     }()
 
@@ -93,8 +94,8 @@ class DayViewEntryCell: UITableViewCell {
 
     func setValues(for entry: DayViewModel.DayViewEntry) {
         self.promptView.text = entry.prompt
-        self.scores = entry.scoreProvider.scores
-        self.scoreSelectionView.setOptions(options: self.scores.map({ "\($0.rawValue)" }))
+        self.scores = entry.scoreProvider.scores()
+        self.scoreSelectionView.setOptions(options: self.scores.map({ $0.shortLabel(for: entry.scoreProvider) }))
         if let score = entry.score {
             self.scoreSelectionView.selectedOptionIndex = self.scores.firstIndex(of: score)
         }

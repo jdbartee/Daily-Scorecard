@@ -31,7 +31,7 @@ class ServiceProvider {
     lazy var themeService: ThemeService = ThemeService(self)
     lazy var notificationService: NotificationService = NotificationService(self)
 
-    lazy var scoreProvider: ScoreProvider = ScoreProvider(self)
+    lazy var scoreProviderService: ScoreProviderService = ScoreProviderService(self)
     
     lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*

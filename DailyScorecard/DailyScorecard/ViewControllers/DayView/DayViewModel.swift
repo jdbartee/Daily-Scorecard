@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum DayViewViewModel: Equatable {
+enum DayViewViewModel {
     case none
     case error(error: String)
     case value(model: DayViewModel)
 }
 
-struct DayViewModel: Equatable {
-    struct DayViewEntry: Hashable {
+struct DayViewModel {
+    struct DayViewEntry {
         var entryId: UUID?
         var promptId: UUID
         
@@ -27,6 +27,21 @@ struct DayViewModel: Equatable {
 
     var date: Date
     var entries: [DayViewEntry]
+}
+
+extension DayViewModel.DayViewEntry: Equatable, Hashable {
+    static func == (lhs: DayViewModel.DayViewEntry, rhs: DayViewModel.DayViewEntry) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(entryId)
+        hasher.combine(promptId)
+        hasher.combine(prompt)
+        hasher.combine(promptActive)
+        hasher.combine(score)
+        hasher.combine(scoreProvider.key)
+    }
 }
 
 extension DayViewModel.DayViewEntry {

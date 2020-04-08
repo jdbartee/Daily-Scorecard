@@ -44,12 +44,13 @@
 		7B7963AC23FF6F5F0073649E /* PromptEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963AB23FF6F5F0073649E /* PromptEditViewController.swift */; };
 		7B7963AE23FF6F870073649E /* PromptEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963AD23FF6F870073649E /* PromptEditViewModel.swift */; };
 		7B7963B023FF7F720073649E /* PromptEditViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7963AF23FF7F720073649E /* PromptEditViewService.swift */; };
-		7B94AFD72411C26800AEDEC8 /* ScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFD62411C26800AEDEC8 /* ScoreProvider.swift */; };
+		7B94AFD72411C26800AEDEC8 /* ScoreProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFD62411C26800AEDEC8 /* ScoreProviderService.swift */; };
 		7B94AFDB2411E99100AEDEC8 /* ChartPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDA2411E99100AEDEC8 /* ChartPageViewController.swift */; };
 		7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDC2411EB1F00AEDEC8 /* ChartViewService.swift */; };
 		7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B94AFDE2411EB4900AEDEC8 /* ChartViewModel.swift */; };
 		7B98A9C124299227002BA9D1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98A9C024299227002BA9D1 /* SettingsViewController.swift */; };
 		7B98A9C4242A5435002BA9D1 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98A9C3242A5435002BA9D1 /* ThemeViewController.swift */; };
+		7BB781D7243D749F00332AB7 /* ScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB781D6243D749F00332AB7 /* ScoreProvider.swift */; };
 		7BD4B823242AD04300D894E5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4B822242AD04300D894E5 /* Theme.swift */; };
 		7BD4B825242AD10400D894E5 /* ThemeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4B824242AD10400D894E5 /* ThemeService.swift */; };
 		7BD4B827242AD60B00D894E5 /* ThemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD4B826242AD60B00D894E5 /* ThemeViewModel.swift */; };
@@ -114,12 +115,13 @@
 		7B7963AB23FF6F5F0073649E /* PromptEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptEditViewController.swift; sourceTree = "<group>"; };
 		7B7963AD23FF6F870073649E /* PromptEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptEditViewModel.swift; sourceTree = "<group>"; };
 		7B7963AF23FF7F720073649E /* PromptEditViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptEditViewService.swift; sourceTree = "<group>"; };
-		7B94AFD62411C26800AEDEC8 /* ScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreProvider.swift; sourceTree = "<group>"; };
+		7B94AFD62411C26800AEDEC8 /* ScoreProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreProviderService.swift; sourceTree = "<group>"; };
 		7B94AFDA2411E99100AEDEC8 /* ChartPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPageViewController.swift; sourceTree = "<group>"; };
 		7B94AFDC2411EB1F00AEDEC8 /* ChartViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewService.swift; sourceTree = "<group>"; };
 		7B94AFDE2411EB4900AEDEC8 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		7B98A9C024299227002BA9D1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7B98A9C3242A5435002BA9D1 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
+		7BB781D6243D749F00332AB7 /* ScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreProvider.swift; sourceTree = "<group>"; };
 		7BD4B822242AD04300D894E5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7BD4B824242AD10400D894E5 /* ThemeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeService.swift; sourceTree = "<group>"; };
 		7BD4B826242AD60B00D894E5 /* ThemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModel.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				7B719EF82404DFFC00A42374 /* Prompt.swift */,
 				7B4FEAE22408BD37000AB5AC /* Entry.swift */,
 				7BD4B822242AD04300D894E5 /* Theme.swift */,
+				7BB781D6243D749F00332AB7 /* ScoreProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -284,7 +287,7 @@
 				7B7963A123FB96370073649E /* ServiceProvider.swift */,
 				7B4FEAE02404E1F9000AB5AC /* PromptStoreService.swift */,
 				7B4FEAE42408BDE0000AB5AC /* EntryStoreService.swift */,
-				7B94AFD62411C26800AEDEC8 /* ScoreProvider.swift */,
+				7B94AFD62411C26800AEDEC8 /* ScoreProviderService.swift */,
 				7BD4B824242AD10400D894E5 /* ThemeService.swift */,
 				7B506026242BB1420042F169 /* AddDetailService.swift */,
 				7B506028242C43200042F169 /* NotificationService.swift */,
@@ -472,7 +475,7 @@
 				7B506027242BB1420042F169 /* AddDetailService.swift in Sources */,
 				7B79637A23FA13A30073649E /* DailyScorecard.xcdatamodeld in Sources */,
 				7B50602D242C61A90042F169 /* NotificationViewController.swift in Sources */,
-				7B94AFD72411C26800AEDEC8 /* ScoreProvider.swift in Sources */,
+				7B94AFD72411C26800AEDEC8 /* ScoreProviderService.swift in Sources */,
 				7BD4B825242AD10400D894E5 /* ThemeService.swift in Sources */,
 				7B4F92672404C0F500993700 /* PromptEditFlowController.swift in Sources */,
 				7BD4B829242AD64700D894E5 /* ThemeViewService.swift in Sources */,
@@ -507,6 +510,7 @@
 				7B79637023FA13A30073649E /* AppDelegate.swift in Sources */,
 				7B4FEAE12404E1F9000AB5AC /* PromptStoreService.swift in Sources */,
 				7B4FEAED240CD6AF000AB5AC /* Calendar.swift in Sources */,
+				7BB781D7243D749F00332AB7 /* ScoreProvider.swift in Sources */,
 				7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */,
 				7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */,
 				7B506031242C62470042F169 /* NotificationViewService.swift in Sources */,

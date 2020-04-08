@@ -48,7 +48,7 @@ class PromptEditFlowController: UIViewController {
     }
 
     func addNewPrompt() {
-        let vc = PromptEditViewController.instantiate()
+        let vc = PromptEditViewController(style: .insetGrouped)
         vc.flowController = self
         vc.service = self.serviceProvider?.promptEditViewService
         vc.promptModel = self.serviceProvider?.promptEditViewService.newPrompt()
@@ -58,10 +58,10 @@ class PromptEditFlowController: UIViewController {
     }
 
     func showDetail(prompt: Prompt) {
-        let vc = PromptEditViewController.instantiate()
+        let vc = PromptEditViewController(style: .insetGrouped)
         vc.flowController = self
         vc.service = self.serviceProvider?.promptEditViewService
-        vc.promptModel = self.serviceProvider?.promptEditViewService.editPrompt(prompt: PromptEditViewModel(prompt: prompt))
+        vc.promptModel = self.serviceProvider?.promptEditViewService.editPrompt(prompt: prompt)
         let nc = UINavigationController(rootViewController: vc)
         self.present(nc, animated: true)
     }

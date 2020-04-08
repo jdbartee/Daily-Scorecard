@@ -8,11 +8,13 @@
 
 import Foundation
 
-struct PromptEditViewModel: Hashable {
+struct PromptEditViewModel {
     var id: UUID?
     var prompt: String
     var active: Bool
     var sortOrder: Int
+    var scoreProviderKey: String
+    var scoreProviderKeysAndNames: [(String, String)]
 }
 
 extension PromptEditViewModel {
@@ -21,5 +23,7 @@ extension PromptEditViewModel {
         self.prompt = prompt.prompt
         self.active = prompt.active
         self.sortOrder = prompt.sortOrder
+        self.scoreProviderKey = prompt.scoreProvider.key
+        self.scoreProviderKeysAndNames = []
     }
 }

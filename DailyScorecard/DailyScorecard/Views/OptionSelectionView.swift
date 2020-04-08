@@ -22,6 +22,15 @@ class OptionSelectionView: UIControl {
         }
     }
 
+    var spacing: CGFloat {
+        get {
+            return optionsStackView.spacing
+        }
+        set {
+            optionsStackView.spacing = newValue
+        }
+    }
+
     func setOptions(options: [String]) {
         self.selectedOptionIndex = nil
         self.options = options
@@ -40,16 +49,16 @@ class OptionSelectionView: UIControl {
     private func animateChangeToSelectedOption(_ oldValue: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             UIView.animate(withDuration: 0.25) {
-                if let oldIndex = oldValue {
+                if let oldIndex = oldValue, oldIndex < self.optionsStackView.arrangedSubviews.count {
                     let button = self.optionsStackView.arrangedSubviews[oldIndex] as? UIButton
                     button?.isSelected = false
                 }
-                if let index = self.selectedOptionIndex {
+                if let index = self.selectedOptionIndex, index < self.optionsStackView.arrangedSubviews.count {
                     if let button = self.optionsStackView.arrangedSubviews[index] as? UIButton {
                         self.selector.isHidden = false
                         button.isSelected = true
-                        self.selector.frame = button.frame
-                        self.selector.layer.cornerRadius = button.frame.height / 2.0
+                        self.selector.frame = button.frame.insetBy(dx: self.optionsStackView.spacing * -0.5, dy: self.optionsStackView.spacing * -0.5)
+                        self.selector.layer.cornerRadius = self.selector.frame.height / 2.0
                         }
                 } else {
                     self.selector.isHidden = true

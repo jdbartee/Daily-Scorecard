@@ -28,9 +28,6 @@ class CCHartViewService: ChartViewService, BaseService {
     var promptStore: PromptStoreService {
         serviceProvider.promptStoreService
     }
-    var scoreProvider: ScoreProvider {
-        serviceProvider.scoreProvider
-    }
 
     func dateRange() -> DateInterval {
         let today = Calendar.current.today()
@@ -53,21 +50,22 @@ class CCHartViewService: ChartViewService, BaseService {
             var date = dateRange.start
 
             while dateRange.contains(date) {
-                let entries = (try? self.entryStore.getEntries(for: date).get()) ?? []
-                let scores = entries.filter { entry in
+                let entries: [Entry] = (try? self.entryStore.getEntries(for: date).get()) ?? []
+
+                let scores: [Float] = entries.filter() { entry in
                     switch filter {
                     case .all:
                         return true
                     case .prompt(let prompt):
                         return prompt.id == entry.promptId
                     }
-                }.map { entry in
-                    self.scoreProvider.numericValue(for: entry.score)
-                }.filter({ score in
-                    score != nil
-                }).map( { score in
-                    return (score!) / self.scoreProvider.maxNumericValue()
-                })
+                }.compactMap() { entry in
+                    if let prompt = self.promptStore.getPrompt(for: entry.promptId).toOptional() {
+                        let value: Float? = entry.score.numericValue(for: prompt.scoreProvider)
+                        return value
+                    }
+                    return nil
+                }
 
                 let percentage = scores.reduce(Float(0.0), {(r,v) in r + v}) / Float(scores.count)
                 percentages.append(percentage)
@@ -77,7 +75,7 @@ class CCHartViewService: ChartViewService, BaseService {
             }
             let model = ChartViewModel(percentages: percentages, dates: dates, activeFilter: filter, filters: filters)
             promise(.success(model))
-        }).delay(for: .seconds(0.5), scheduler: DispatchQueue.main).eraseToAnyPublisher()
+        }).eraseToAnyPublisher()
     }
 
     init(_ serviceProvider: ServiceProvider) {
