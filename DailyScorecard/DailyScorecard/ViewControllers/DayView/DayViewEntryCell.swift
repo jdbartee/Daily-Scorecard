@@ -51,6 +51,8 @@ class DayViewEntryCell: UITableViewCell {
         scoreStackView.translatesAutoresizingMaskIntoConstraints = false
         scoreStackView.selectedOptionIndexDidChange = self.scoreIndexChanged(idx:)
         scoreStackView.spacing = 12
+        scoreStackView.adjustsFontForContentSizeCategory = true
+        scoreStackView.font = .preferredFont(forTextStyle: .title1)
         return scoreStackView
     }()
 

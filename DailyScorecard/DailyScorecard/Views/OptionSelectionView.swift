@@ -31,6 +31,26 @@ class OptionSelectionView: UIControl {
         }
     }
 
+    var adjustsFontForContentSizeCategory: Bool = false {
+        didSet {
+            for button in self.optionsStackView.arrangedSubviews {
+                if let button = button as? UIButton {
+                    button.titleLabel?.adjustsFontForContentSizeCategory = self.adjustsFontForContentSizeCategory
+                }
+            }
+        }
+    }
+
+    var font: UIFont = UIFont() {
+        didSet {
+            for button in self.optionsStackView.arrangedSubviews {
+                if let button = button as? UIButton {
+                    button.titleLabel?.font = self.self.font
+                }
+            }
+        }
+    }
+
     func setOptions(options: [String]) {
         self.selectedOptionIndex = nil
         self.options = options
@@ -92,8 +112,8 @@ class OptionSelectionView: UIControl {
         button.addTarget(self, action: #selector(optionTapped(_:)), for: .touchUpInside)
         button.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
 
-        button.titleLabel?.adjustsFontForContentSizeCategory = true
-        button.titleLabel?.font = .preferredFont(forTextStyle: .title1)
+        button.titleLabel?.adjustsFontForContentSizeCategory = self.adjustsFontForContentSizeCategory
+        button.titleLabel?.font = self.font
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.sizeToFit()
 
