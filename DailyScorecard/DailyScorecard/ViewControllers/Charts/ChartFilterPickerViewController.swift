@@ -65,18 +65,27 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
         return [self.filters.filter({$0 == .all}), self.filters.filter({$0 != .all})]
     }
 
+    var selectedIndex: IndexPath? {
+        for (section, array) in self.tableFilters.enumerated() {
+            if let row = array.firstIndex(of: self.selectedFilter) {
+                return IndexPath(row: row, section: section)
+            }
+        }
+        return nil
+    }
+
     func filtersChanged(_ oldValue: [ChartViewServiceFilter]) {
 
-        let oldFilters = oldValue.compactMap({ f -> UUID? in
+        let oldFilters = oldValue.compactMap({ f -> String? in
             if case ChartViewServiceFilter.prompt(let prompt) = f {
-                return prompt.id
+                return prompt.prompt
             } else {
                 return nil
             }
         })
-        let newFilters = filters.compactMap({ f -> UUID? in
+        let newFilters = filters.compactMap({ f -> String? in
             if case ChartViewServiceFilter.prompt(let prompt) = f {
-                return prompt.id
+                return prompt.prompt
             } else {
                 return nil
             }
@@ -149,20 +158,25 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
         case .prompt(let prompt):
             cell.filterLabel.text = prompt.prompt
         }
-        if self.selectedFilter == filter {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+        cell.accessoryType = self.selectedFilter == filter ? .checkmark : .none
         return cell
     }
 }
 
 extension ChartFilterPickerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectedIndex = self.selectedIndex,
+            let cell = self.tableView.cellForRow(at: selectedIndex) {
+            cell.accessoryType = .none
+        }
         let filter = tableFilters[indexPath.section][indexPath.row]
         self.selectedFilter = filter
         delegate?.chartFilterPickerView(self, didChangeFilterTo: filter)
+
+        if let cell = self.tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .checkmark
+        }
+
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
