@@ -173,14 +173,14 @@ class PromptEditViewController: UITableViewController {
         if indexPath.section == 0 {
             return staticCells[indexPath.row]
         } else if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "default") else { fatalError() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "default") else { return UITableViewCell(style: .default, reuseIdentifier: nil) }
             if let (k,  v) = self.providerList?[indexPath.row] {
                 cell.accessoryType = k == self.selectedProviderKey ? .checkmark : .none
                 cell.textLabel?.text = v
             }
             return cell
         } else {
-            fatalError()
+            return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
     }
 

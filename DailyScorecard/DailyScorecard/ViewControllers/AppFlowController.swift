@@ -94,9 +94,6 @@ class AppFlowController: UIViewController {
         self.ownedNavigationController.pushViewController(vc, animated: true)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-    }
-
     override func loadView() {
         view = UIView()
         install(child: self.ownedNavigationController)

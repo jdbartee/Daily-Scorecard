@@ -81,7 +81,7 @@ extension ThemeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "theme") as? ThemeTableViewCell else {
-            fatalError()
+            return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         let theme = themes[indexPath.row]
 
@@ -157,6 +157,6 @@ class ThemeTableViewCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
 }

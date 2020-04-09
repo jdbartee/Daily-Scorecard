@@ -132,7 +132,7 @@ extension DayViewTableController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let entry = self.entries[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "entry") as? DayViewEntryCell else {
-            fatalError()
+            return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         cell.setValues(for: entry)
         cell.scoreValueChanged = { score in

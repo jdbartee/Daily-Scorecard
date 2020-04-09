@@ -129,6 +129,6 @@ class DayViewEntryCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError()
+        return nil
     }
 }

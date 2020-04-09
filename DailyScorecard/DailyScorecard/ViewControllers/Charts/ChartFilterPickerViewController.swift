@@ -147,7 +147,7 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "chart.filter") as? ChartFilterCell else {
-            fatalError()
+            return UITableViewCell(style: .default, reuseIdentifier: nil)
         }
         cell.prepareForReuse()
         let filter = tableFilters[indexPath.section][indexPath.row]
@@ -219,6 +219,6 @@ class ChartFilterCell: UITableViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
 }

@@ -111,7 +111,7 @@ class ChartPageViewController: UIViewController {
         case .unspecified:
             NSLayoutConstraint.activate(portraitConstraints)
         @unknown default:
-            fatalError()
+            NSLayoutConstraint.activate(portraitConstraints)
         }
     }
 
