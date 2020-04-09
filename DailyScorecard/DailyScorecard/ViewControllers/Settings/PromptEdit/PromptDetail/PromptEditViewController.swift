@@ -189,4 +189,10 @@ class PromptEditViewController: UITableViewController {
             tableView.reloadSections(IndexSet(arrayLiteral: 1), with: .automatic)
         }
     }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        guard section == 1 else { return nil }
+
+        return NSLocalizedString("Score_Provider_Footer", comment: "")
+    }
 }
