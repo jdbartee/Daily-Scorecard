@@ -20,8 +20,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
-                                    <tabBarItem title="Chart" image="chart.bar" catalog="system" selectedImage="chart.bar" id="G8T-Qj-8wG"/>
-                                    <tabBarItem title="Entries" image="list.dash" catalog="system" id="gf7-Wv-euj"/>
+                                    <tabBarItem title="" image="chart.bar" catalog="system" selectedImage="chart.bar" id="G8T-Qj-8wG"/>
+                                    <tabBarItem title="" image="list.dash" catalog="system" id="gf7-Wv-euj"/>
                                 </items>
                             </tabBar>
                         </subviews>

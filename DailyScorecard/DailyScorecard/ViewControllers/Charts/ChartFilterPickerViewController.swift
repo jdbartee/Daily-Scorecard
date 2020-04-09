@@ -41,7 +41,6 @@ class ChartFilterPickerViewController: UIViewController {
         return self
     }()
 
-
     var selectionView: UIView {
         self.tableView
     }
@@ -67,11 +66,29 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
     }
 
     func filtersChanged(_ oldValue: [ChartViewServiceFilter]) {
-        tableView.beginUpdates()
-        let oldFilters = oldValue.filter({$0 != .all})
-        let newFilters = filters.filter({$0 != .all})
+
+        let oldFilters = oldValue.compactMap({ f -> UUID? in
+            if case ChartViewServiceFilter.prompt(let prompt) = f {
+                return prompt.id
+            } else {
+                return nil
+            }
+        })
+        let newFilters = filters.compactMap({ f -> UUID? in
+            if case ChartViewServiceFilter.prompt(let prompt) = f {
+                return prompt.id
+            } else {
+                return nil
+            }
+        })
 
         let diff = newFilters.difference(from: oldFilters)
+
+        if diff.count == 0 {
+            return
+        }
+
+        tableView.beginUpdates()
         for d in diff {
             switch d {
             case .insert(let offset, _, _):
@@ -127,7 +144,7 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
         let filter = tableFilters[indexPath.section][indexPath.row]
         switch filter {
         case .all:
-            cell.filterLabel.text = "All"
+            cell.filterLabel.text = NSLocalizedString("All_Filter_Label", comment: "")
             cell.filterLabel.sizeToFit()
         case .prompt(let prompt):
             cell.filterLabel.text = prompt.prompt

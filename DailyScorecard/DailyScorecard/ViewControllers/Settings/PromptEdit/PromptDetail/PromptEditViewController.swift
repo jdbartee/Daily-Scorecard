@@ -39,6 +39,8 @@ class PromptEditViewController: UITableViewController {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .roundedRect
+        textField.adjustsFontForContentSizeCategory = true
+        textField.font = .preferredFont(forTextStyle: .body)
         return textField
     }()
 

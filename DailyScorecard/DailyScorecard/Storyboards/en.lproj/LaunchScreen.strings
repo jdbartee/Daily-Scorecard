@@ -1,0 +1,12 @@
+
+/* Class = "UITabBarItem"; title = "Charts_Tab_Button"; ObjectID = "G8T-Qj-8wG"; */
+"G8T-Qj-8wG.title" = "Charts_Tab_Button";
+
+/* Class = "UITabBarItem"; title = "Entries"; ObjectID = "gf7-Wv-euj"; */
+"gf7-Wv-euj.title" = "Entries";
+
+/* Class = "UIViewController"; title = "Introspect"; ObjectID = "htb-hi-EPh"; */
+"htb-hi-EPh.title" = "Introspect";
+
+/* Class = "UINavigationItem"; title = "Introspect"; ObjectID = "y7M-IH-K4O"; */
+"y7M-IH-K4O.title" = "Introspect";
