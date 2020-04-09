@@ -68,7 +68,7 @@ class ThemeViewController: UIViewController {
     override func loadView() {
         self.view = UIView()
         self.view.backgroundColor = .systemGroupedBackground
-        self.title = "Themes"
+        self.title = NSLocalizedString("Themes_Title", comment: "")
 
         self.view.addSubview(tableView)
     }

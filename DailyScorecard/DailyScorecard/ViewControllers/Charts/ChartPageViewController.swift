@@ -25,7 +25,7 @@ class ChartPageViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.title = "Weekly Trends"
+        self.title = NSLocalizedString("Weekly_Trends_Title", comment: "")
         self.queryData(for: state.activeFilter)
 
         NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)

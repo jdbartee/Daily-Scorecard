@@ -40,7 +40,7 @@ class SettingsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Settings"
+        self.title = NSLocalizedString("Settings_Title", comment: "")
     }
 }
 
@@ -72,7 +72,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     var titles: [String] {
-        return ["Edit Prompts", "Themes", "Notifications", "About"]
+        return [
+            NSLocalizedString("Edit_Prompts_Title", comment: ""),
+            NSLocalizedString("Themes_Title", comment: ""),
+            NSLocalizedString("Notifications_Title", comment: ""),
+            NSLocalizedString("About_Title", comment: ""),
+        ]
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

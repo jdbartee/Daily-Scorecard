@@ -52,7 +52,7 @@ class PromptEditFlowController: UIViewController {
         vc.flowController = self
         vc.service = self.serviceProvider?.promptEditViewService
         vc.promptModel = self.serviceProvider?.promptEditViewService.newPrompt()
-        vc.title = "New Prompt"
+        vc.title = NSLocalizedString("New_Prompt_Title", comment: "")
         let nc = UINavigationController(rootViewController: vc)
         self.present(nc, animated: true, completion: nil)
     }

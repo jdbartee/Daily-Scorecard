@@ -68,7 +68,6 @@ class DayViewEntryCell: UITableViewCell {
         let cardView = UIView()
         cardView.translatesAutoresizingMaskIntoConstraints = false
         cardView.backgroundColor = .systemBackground
-        //cardView.layer.cornerRadius = 8
         cardView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
 
 

@@ -97,9 +97,9 @@ extension ChartFilterPickerViewController: UITableViewDataSource {
         label.translatesAutoresizingMaskIntoConstraints =  false
         switch section {
         case 0:
-            label.text = "Filters:"
+            label.text = NSLocalizedString("Filters_Section_Header", comment: "")
         case 1:
-            label.text = "Prompts:"
+            label.text = NSLocalizedString("Prompts_Section_Header", comment: "")
         default:
             break
         }

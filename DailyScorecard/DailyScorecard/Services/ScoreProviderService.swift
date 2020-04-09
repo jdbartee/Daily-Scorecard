@@ -45,7 +45,7 @@ class ScoreFactory {
 
 struct TwoValueScoreProvider: ScoreProvider {
     static var key: String = "TwoValue"
-    static var displayName: String = "Pass/Fail"
+    static var displayName: String = NSLocalizedString("TwoValue_Provider_Name", comment: "")
 
     func scores() -> [Score] {
         return [.Option1, .Option2]
@@ -62,8 +62,8 @@ struct TwoValueScoreProvider: ScoreProvider {
 
     func shortLabel(for score: Score) -> String {
         switch score {
-            case .Option1: return "Fail"
-            case .Option2: return "Pass"
+        case .Option1: return NSLocalizedString("TwoValue_Fail_Label", comment: "")
+        case .Option2: return NSLocalizedString("TwoValue_Pass_Label", comment: "")
             case .None: return ""
             default: return ""
         }
@@ -72,19 +72,19 @@ struct TwoValueScoreProvider: ScoreProvider {
 
 struct FiveValueScoreProvider: ScoreProvider {
     static var key: String = "FiveValue"
-    static var displayName: String = "Out of Five"
+    static var displayName: String = NSLocalizedString("FiveValue_Provider_Name", comment: "")
 
     func scores() -> [Score] {
-        return [.Option1, .Option2, .Option3, .Option4, .Option5]
+        return [.Option3, .Option4, .Option5, .Option6, .Option7]
     }
 
     func numericValue(for score: Score) -> Float? {
         switch score {
-        case .Option1: return 0.5 / 5.0
-        case .Option2: return 1.5 / 5.0
-        case .Option3: return 2.5 / 5.0
-        case .Option4: return 3.5 / 5.0
-        case .Option5: return 5.0 / 5.0
+        case .Option3: return 0.5 / 5.0
+        case .Option4: return 1.5 / 5.0
+        case .Option5: return 2.5 / 5.0
+        case .Option6: return 3.5 / 5.0
+        case .Option7: return 5.0 / 5.0
         case .None: return nil
         default: return nil
         }
@@ -92,11 +92,11 @@ struct FiveValueScoreProvider: ScoreProvider {
 
     func shortLabel(for score: Score) -> String {
         switch score {
-        case .Option1: return "1"
-        case .Option2: return "2"
-        case .Option3: return "3"
-        case .Option4: return "4"
-        case .Option5: return "5"
+        case .Option3: return String(1)
+        case .Option4: return String(2)
+        case .Option5: return String(3)
+        case .Option6: return String(4)
+        case .Option7: return String(5)
         case .None: return ""
         default: return ""
         }

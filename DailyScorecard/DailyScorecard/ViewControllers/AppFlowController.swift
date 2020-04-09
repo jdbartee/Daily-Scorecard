@@ -32,10 +32,10 @@ class AppFlowController: UIViewController {
         tabController.addChild(self.chartController)
         tabController.addChild(self.dayViewController)
 
-        self.chartController.tabBarItem.title = "Charts"
+        self.chartController.tabBarItem.title = NSLocalizedString("Charts_Tab_Button", comment: "")
         self.chartController.tabBarItem.image = UIImage(systemName: "chart.bar")
 
-        self.dayViewController.tabBarItem.title = "Entries"
+        self.dayViewController.tabBarItem.title = NSLocalizedString("Entries_Tab_Button", comment: "")
         self.dayViewController.tabBarItem.image = UIImage(systemName: "list.dash")
 
         tabController.navigationItem.setLeftBarButton(self.actionButtonItem, animated: true)
@@ -51,16 +51,9 @@ class AppFlowController: UIViewController {
         return vc
     }()
 
-    lazy var testController: UIViewController = {
-        let testController = TestController()
-        testController.title = "TESTING"
-        return testController
-    }()
-
     lazy var dayViewController: UIViewController = {
         let vc = DayViewPagingController()
         vc.serviceProvider = self.serviceProvider
-        vc.title = "Day View"
         vc.navigationItem.setRightBarButton(self.actionButtonItem, animated: true)
         vc.navigationItem.setLeftBarButton(self.chartsButtonItem, animated: true)
         return vc

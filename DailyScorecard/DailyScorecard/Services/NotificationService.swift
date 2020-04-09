@@ -114,7 +114,7 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
         if let dateComponents = nextNotificationDateComponents() {
             let content = UNMutableNotificationContent()
             content.title = serviceProvider.appDetails.appName
-            content.body = "Fill out your score card for the day."
+            content.body = NSLocalizedString("Notification_Text", comment: "")
 
             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
             let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)

@@ -60,7 +60,7 @@
 		7BD6A09D241599A9008FF75A /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD6A09C241599A9008FF75A /* Result.swift */; };
 		7BE52D832425BE6E00EBE6BB /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D822425BE6E00EBE6BB /* Color.swift */; };
 		7BE52D852426918800EBE6BB /* OptionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D842426918800EBE6BB /* OptionSelectionView.swift */; };
-		7BE52D872426C72F00EBE6BB /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE52D862426C72F00EBE6BB /* TestController.swift */; };
+		7BF52838243EB0DD008359EF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BF5283A243EB0DD008359EF /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +131,7 @@
 		7BD6A09C241599A9008FF75A /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		7BE52D822425BE6E00EBE6BB /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7BE52D842426918800EBE6BB /* OptionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectionView.swift; sourceTree = "<group>"; };
-		7BE52D862426C72F00EBE6BB /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
+		7BF52839243EB0DD008359EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +227,7 @@
 		7B79636E23FA13A30073649E /* DailyScorecard */ = {
 			isa = PBXGroup;
 			children = (
+				7BF5283A243EB0DD008359EF /* Localizable.strings */,
 				7B79639423FA13C20073649E /* DailyScorecard */,
 				7B79637B23FA13A50073649E /* Assets.xcassets */,
 				7B79638023FA13A50073649E /* Info.plist */,
@@ -254,7 +255,6 @@
 				7B79639823FA14020073649E /* Services */,
 				7B79639723FA13FC0073649E /* Models */,
 				7B79639523FA13EB0073649E /* Storyboards */,
-				7BE52D862426C72F00EBE6BB /* TestController.swift */,
 			);
 			path = DailyScorecard;
 			sourceTree = "<group>";
@@ -450,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B4FEAEB240CB200000AB5AC /* Main.storyboard in Resources */,
+				7BF52838243EB0DD008359EF /* Localizable.strings in Resources */,
 				7B79637F23FA13A50073649E /* LaunchScreen.storyboard in Resources */,
 				7B79637C23FA13A50073649E /* Assets.xcassets in Resources */,
 			);
@@ -497,7 +498,6 @@
 				7B105BD9241F08AF00D8581A /* DayViewTableController.swift in Sources */,
 				7B7963B023FF7F720073649E /* PromptEditViewService.swift in Sources */,
 				7B94AFDD2411EB1F00AEDEC8 /* ChartViewService.swift in Sources */,
-				7BE52D872426C72F00EBE6BB /* TestController.swift in Sources */,
 				7B506025242B9FDA0042F169 /* AboutViewController.swift in Sources */,
 				7B4F92652402DF5800993700 /* CancelBag.swift in Sources */,
 				7B4FEAF12410BD61000AB5AC /* DayViewPagingController.swift in Sources */,
@@ -547,6 +547,14 @@
 				7B79637E23FA13A50073649E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7BF5283A243EB0DD008359EF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7BF52839243EB0DD008359EF /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

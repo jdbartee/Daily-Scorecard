@@ -276,7 +276,6 @@ extension DayViewPagingController: UIPageViewControllerDelegate {
                 } else if vc == self.dataSource.nextViewController, let date = self.nextDate {
                     self.queryData(for: date)
                 } else {
-                    print("A Major error occured")
                     self.reloadCurrentState()
                 }
             }

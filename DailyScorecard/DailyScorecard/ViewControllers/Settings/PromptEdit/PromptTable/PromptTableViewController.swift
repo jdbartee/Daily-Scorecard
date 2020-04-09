@@ -119,7 +119,7 @@ class PromptTableViewController: UITableViewController, Storyboarded {
             case 0:
                 return nil
             case 1:
-                return "Inactive"
+                return NSLocalizedString("Inactive_Section_Label", comment: "")
             default:
                 return nil
             }

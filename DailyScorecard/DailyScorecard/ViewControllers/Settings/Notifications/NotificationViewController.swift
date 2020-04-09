@@ -38,7 +38,7 @@ class NotificationViewController: UIViewController {
         deniedPrompt.translatesAutoresizingMaskIntoConstraints = false
         deniedPrompt.numberOfLines = 0
         deniedPrompt.textColor = .systemRed
-        deniedPrompt.text = "You need to allow notifications in settings in order to set up reminders."
+        deniedPrompt.text = NSLocalizedString("Allow_Notifications_Error_Prompt", comment: "")
         return deniedPrompt
     }()
 
@@ -60,7 +60,7 @@ class NotificationViewController: UIViewController {
         mainPrompt.font = .preferredFont(forTextStyle: .body)
         mainPrompt.translatesAutoresizingMaskIntoConstraints = false
         mainPrompt.numberOfLines = 0
-        mainPrompt.text = "Would you like to recieve notifications daily to remind you to fill out your daily scorecard?"
+        mainPrompt.text = NSLocalizedString("Notification_Prompt", comment: "")
         return mainPrompt
     }()
 
@@ -94,7 +94,7 @@ class NotificationViewController: UIViewController {
         toggleSwitchLabel.adjustsFontSizeToFitWidth = true
         toggleSwitchLabel.font = .preferredFont(forTextStyle: .body)
         toggleSwitchLabel.translatesAutoresizingMaskIntoConstraints = false
-        toggleSwitchLabel.text = "Active"
+        toggleSwitchLabel.text = NSLocalizedString("Notification_Active_Label", comment: "")
         return toggleSwitchLabel
     }()
 
@@ -117,7 +117,7 @@ class NotificationViewController: UIViewController {
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.font = .preferredFont(forTextStyle: .body)
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.text = "At what time:"
+        timeLabel.text = NSLocalizedString("Notification_Time_Label", comment: "")
         return timeLabel
     }()
 
@@ -241,7 +241,7 @@ class NotificationViewController: UIViewController {
     }
 
     override func loadView() {
-        self.title = "Notifications"
+        self.title = NSLocalizedString("Notifications_Title", comment: "")
         self.view = UIView()
 
         view.backgroundColor = .systemGroupedBackground

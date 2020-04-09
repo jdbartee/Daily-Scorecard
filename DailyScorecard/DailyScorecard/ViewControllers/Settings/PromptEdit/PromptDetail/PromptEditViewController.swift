@@ -52,7 +52,7 @@ class PromptEditViewController: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.selectionStyle = .none
         let label = UILabel()
-        label.text = "Prompt"
+        label.text = NSLocalizedString("Prompt_Label", comment: "")
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
         label.font = .preferredFont(forTextStyle: .body)
@@ -79,7 +79,7 @@ class PromptEditViewController: UITableViewController {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
         cell.selectionStyle = .none
         let label = UILabel()
-        label.text = "Is Prompt Active?"
+        label.text = NSLocalizedString("Prompt_Active_Label", comment: "")
         label.translatesAutoresizingMaskIntoConstraints = false
         label.adjustsFontForContentSizeCategory = true
         label.font = .preferredFont(forTextStyle: .body)

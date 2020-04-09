@@ -19,7 +19,7 @@ class DayViewPagingService: BaseService {
                 prevDate: Calendar.current.prevDay(date),
                 nextDate: nil,
                 currentDate: date,
-                currentDateLabel: "Today")
+                currentDateLabel: NSLocalizedString("Today", comment: ""))
 
             promise(.success(.today(model)))
         }.eraseToAnyPublisher()
@@ -34,7 +34,7 @@ class DayViewPagingService: BaseService {
                     prevDate: Calendar.current.prevDay(date),
                     nextDate: nil,
                     currentDate: date,
-                    currentDateLabel: "Today")
+                    currentDateLabel: NSLocalizedString("Today_Date_Label", comment: ""))
 
                 promise(.success(.historic(model)))
             }.eraseToAnyPublisher()
