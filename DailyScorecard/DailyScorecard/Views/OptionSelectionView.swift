@@ -68,22 +68,27 @@ class OptionSelectionView: UIControl {
 
     private func animateChangeToSelectedOption(_ oldValue: Int?) {
         DispatchQueue.main.asyncAfter(deadline: .now()) {
-            UIView.animate(withDuration: 0.25) {
+            UIView.animate(withDuration: 0.25, animations: {
                 if let oldIndex = oldValue, oldIndex < self.optionsStackView.arrangedSubviews.count {
                     let button = self.optionsStackView.arrangedSubviews[oldIndex] as? UIButton
                     button?.isSelected = false
                 }
                 if let index = self.selectedOptionIndex, index < self.optionsStackView.arrangedSubviews.count {
                     if let button = self.optionsStackView.arrangedSubviews[index] as? UIButton {
-                        self.selector.isHidden = false
                         button.isSelected = true
                         self.selector.frame = button.frame.insetBy(dx: self.optionsStackView.spacing * -0.5, dy: self.optionsStackView.spacing * -0.5)
                         self.selector.layer.cornerRadius = self.selector.frame.height / 2.0
                         }
-                } else {
-                    self.selector.isHidden = true
                 }
-            }
+            }, completion: { completed in
+                UIView.animate(withDuration: 0.25, animations: {
+                    if let index = self.selectedOptionIndex, index < self.optionsStackView.arrangedSubviews.count {
+                        self.selector.isHidden = false
+                    } else {
+                       self.selector.isHidden = true
+                   }
+                })
+            })
         }
     }
 
