@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import UserNotifications
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     lazy var serviceProvider: ServiceProvider = {

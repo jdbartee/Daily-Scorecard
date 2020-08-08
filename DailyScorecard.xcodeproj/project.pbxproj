@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69E889C324DE521E0006198D /* DailyScorecardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E889C224DE521E0006198D /* DailyScorecardApp.swift */; };
+		69E889C724DE58D20006198D /* ScorePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E889C624DE58D20006198D /* ScorePicker.swift */; };
+		69E889C924DE5F860006198D /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E889C824DE5F860006198D /* EntryCell.swift */; };
+		69E889CB24DE6C4D0006198D /* EntryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E889CA24DE6C4D0006198D /* EntryList.swift */; };
+		69E889CD24DF22230006198D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E889CC24DF22230006198D /* AppModel.swift */; };
 		7B105BD9241F08AF00D8581A /* DayViewTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B105BD8241F08AF00D8581A /* DayViewTableController.swift */; };
 		7B4F92602402CF9900993700 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F925F2402CF9900993700 /* Storyboarded.swift */; };
 		7B4F92622402D14500993700 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4F92612402D14500993700 /* AppFlowController.swift */; };
@@ -74,6 +79,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69E889C224DE521E0006198D /* DailyScorecardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyScorecardApp.swift; sourceTree = "<group>"; };
+		69E889C624DE58D20006198D /* ScorePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePicker.swift; sourceTree = "<group>"; };
+		69E889C824DE5F860006198D /* EntryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryCell.swift; sourceTree = "<group>"; };
+		69E889CA24DE6C4D0006198D /* EntryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryList.swift; sourceTree = "<group>"; };
+		69E889CC24DF22230006198D /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		7B105BD8241F08AF00D8581A /* DayViewTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayViewTableController.swift; sourceTree = "<group>"; };
 		7B4F925F2402CF9900993700 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		7B4F92612402D14500993700 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
@@ -152,6 +162,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69E889C424DE580B0006198D /* DailyScorecardSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				69E889C224DE521E0006198D /* DailyScorecardApp.swift */,
+				69E889CC24DF22230006198D /* AppModel.swift */,
+				69E889C524DE58730006198D /* Views */,
+			);
+			path = DailyScorecardSwiftUI;
+			sourceTree = "<group>";
+		};
+		69E889C524DE58730006198D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				69E889C624DE58D20006198D /* ScorePicker.swift */,
+				69E889C824DE5F860006198D /* EntryCell.swift */,
+				69E889CA24DE6C4D0006198D /* EntryList.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7B4F925E2402CF8900993700 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				7BF5283A243EB0DD008359EF /* Localizable.strings */,
+				69E889C424DE580B0006198D /* DailyScorecardSwiftUI */,
 				7B79639423FA13C20073649E /* DailyScorecard */,
 				7B79637B23FA13A50073649E /* Assets.xcassets */,
 				7B79638023FA13A50073649E /* Info.plist */,
@@ -413,7 +444,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "JD Bartee";
 				TargetAttributes = {
 					7B79636B23FA13A30073649E = {
@@ -483,6 +514,7 @@
 				7B94AFDB2411E99100AEDEC8 /* ChartPageViewController.swift in Sources */,
 				7B50602F242C623A0042F169 /* NotificationViewModel.swift in Sources */,
 				7BD6A09D241599A9008FF75A /* Result.swift in Sources */,
+				69E889CD24DF22230006198D /* AppModel.swift in Sources */,
 				7B7963AC23FF6F5F0073649E /* PromptEditViewController.swift in Sources */,
 				7B506029242C43200042F169 /* NotificationService.swift in Sources */,
 				7B4F92602402CF9900993700 /* Storyboarded.swift in Sources */,
@@ -491,6 +523,7 @@
 				7B7963A423FB96690073649E /* DayViewService.swift in Sources */,
 				7B506033243639FD0042F169 /* DayViewPagingModel.swift in Sources */,
 				7BD4B823242AD04300D894E5 /* Theme.swift in Sources */,
+				69E889C724DE58D20006198D /* ScorePicker.swift in Sources */,
 				7B4FEAE9240C8D93000AB5AC /* TestSwiftUI.swift in Sources */,
 				7B7963AA23FE4E2A0073649E /* PromptTableViewService.swift in Sources */,
 				7B79639B23FA234E0073649E /* DayViewModel.swift in Sources */,
@@ -508,14 +541,17 @@
 				7B7963A823FE47180073649E /* PromptTableViewModel.swift in Sources */,
 				7BD4B827242AD60B00D894E5 /* ThemeViewModel.swift in Sources */,
 				7B79637023FA13A30073649E /* AppDelegate.swift in Sources */,
+				69E889CB24DE6C4D0006198D /* EntryList.swift in Sources */,
 				7B4FEAE12404E1F9000AB5AC /* PromptStoreService.swift in Sources */,
 				7B4FEAED240CD6AF000AB5AC /* Calendar.swift in Sources */,
 				7BB781D7243D749F00332AB7 /* ScoreProvider.swift in Sources */,
 				7B94AFDF2411EB4900AEDEC8 /* ChartViewModel.swift in Sources */,
 				7B79637223FA13A30073649E /* SceneDelegate.swift in Sources */,
 				7B506031242C62470042F169 /* NotificationViewService.swift in Sources */,
+				69E889C324DE521E0006198D /* DailyScorecardApp.swift in Sources */,
 				7B7963A623FE46D10073649E /* PromptTableViewController.swift in Sources */,
 				7B4F92622402D14500993700 /* AppFlowController.swift in Sources */,
+				69E889C924DE5F860006198D /* EntryCell.swift in Sources */,
 				7BD6A0992414BFE6008FF75A /* ChartViewController.swift in Sources */,
 				7B50603524363AAA0042F169 /* DayViewPagingService.swift in Sources */,
 				7B98A9C124299227002BA9D1 /* SettingsViewController.swift in Sources */,
@@ -586,6 +622,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -610,7 +647,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -646,6 +683,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -664,7 +702,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -681,10 +719,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDVN27DBJ7;
 				INFOPLIST_FILE = DailyScorecard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornertwist.DailyScorecard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -699,10 +739,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDVN27DBJ7;
 				INFOPLIST_FILE = DailyScorecard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cornertwist.DailyScorecard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -718,7 +760,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDVN27DBJ7;
 				INFOPLIST_FILE = DailyScorecardTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,7 +782,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WDVN27DBJ7;
 				INFOPLIST_FILE = DailyScorecardTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

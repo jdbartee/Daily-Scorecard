@@ -77,6 +77,8 @@ class NotificationService: NSObject, BaseService, UNUserNotificationCenterDelega
                 case .denied:
                     self.isActive = false
                     self.denied = true
+                case .ephemeral:
+                    self.scheduleNotifications()
                 @unknown default:
                     break
                 }

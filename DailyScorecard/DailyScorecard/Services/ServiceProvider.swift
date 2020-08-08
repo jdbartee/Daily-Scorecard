@@ -13,7 +13,7 @@ protocol BaseService {
     var serviceProvider: ServiceProvider { get }
 }
 
-class ServiceProvider {
+class ServiceProvider: ObservableObject {
     lazy var cancelBag = CancelBag()
     lazy var appDetails: AppDetailService = AppDetailService(self)
     lazy var dayViewPagingService: DayViewPagingService = DayViewPagingService(self)
